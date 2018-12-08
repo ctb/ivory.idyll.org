@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title></title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document">
+<div class="section">
+<h1><a id="measuring-and-increasing-performance" name="measuring-and-increasing-performance">Measuring and Increasing Performance</a></h1>
+<p>&quot;Premature optimization is the root of all evil (or at least most of
+it) in programming.&quot;  Donald Knuth.</p>
+<p>In other words, know thy code!  The only way to find performance
+bottlenecks is to profile your code.  Unfortunately, the situation is
+a bit more complex in Python than you would like it to be: see
+<a class="reference" href="http://docs.python.org/lib/profile.html">http://docs.python.org/lib/profile.html</a>.  Briefly, there are three
+(!?) standard profiling systems that come with Python: profile,
+cProfile (only since python 2.5!), and hotshot (thought note that
+profile and cProfile are Python and C implementations of the same
+API).  There is also a separately maintained one called statprof, that
+I nominally maintain.</p>
+<p>The ones included with Python are deterministic profilers, while
+statprof is a statistical profiler.  What's the difference? To steal
+from the Python docs:</p>
+<blockquote>
+Deterministic profiling is meant to reflect the fact that all function
+call, function return, and exception events are monitored, and precise
+timings are made for the intervals between these events (during which
+time the user's code is executing). In contrast, statistical profiling
+randomly samples the effective instruction pointer, and deduces where
+time is being spent. The latter technique traditionally involves less
+overhead (as the code does not need to be instrumented), but provides
+only relative indications of where time is being spent.</blockquote>
+<p>Let's go to the examples.  Suppose we have two functions 'count1'
+and 'count2', and we want to run both and see where time is spent.</p>
+<hr class="docutils" />
+<p>Here's some example hotshot code:</p>
+<pre class="literal-block">
+import hotshot, hotshot.stats
+prof = hotshot.Profile('hotshot.prof')
+prof.runcall(count1)
+prof.runcall(count2)
+prof.close()
+stats = hotshot.stats.load('hotshot.prof')
+stats.sort_stats('time', 'calls')
+stats.print_stats(20)
+</pre>
+<p>and the resulting output:</p>
+<pre class="literal-block">
+      2 function calls in 5.769 CPU seconds
+
+Ordered by: internal time, call count
+
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1    4.335    4.335    4.335    4.335 count.py:8(count2)
+     1    1.434    1.434    1.434    1.434 count.py:1(count1)
+     0    0.000             0.000          profile:0(profiler)
+</pre>
+<hr class="docutils" />
+<p>Here's some example cProfile code:</p>
+<pre class="literal-block">
+def runboth():
+    count1()
+    count2()
+
+import cProfile, pstats
+cProfile.run('runboth()', 'cprof.out')
+
+p = pstats.Stats('cprof.out')
+p.sort_stats('time').print_stats(10)
+</pre>
+<p>and the resulting output:</p>
+<pre class="literal-block">
+Wed Jun 13 00:11:55 2007    cprof.out
+
+         7 function calls in 5.643 CPU seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    3.817    3.817    4.194    4.194 count.py:8(count2)
+        1    1.282    1.282    1.450    1.450 count.py:1(count1)
+        2    0.545    0.272    0.545    0.272 {range}
+        1    0.000    0.000    5.643    5.643 run-cprofile:8(runboth)
+        1    0.000    0.000    5.643    5.643 &lt;string&gt;:1(&lt;module&gt;)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+</pre>
+<hr class="docutils" />
+<p>And here's an example of statprof, the statistical profiler:</p>
+<pre class="literal-block">
+import statprof
+statprof.start()
+count1()
+count2()
+statprof.stop()
+statprof.display()
+</pre>
+<p>And the output:</p>
+<pre class="literal-block">
+  %   cumulative      self
+ time    seconds   seconds  name
+ 74.66      4.10      4.10  count.py:8:count2
+ 25.34      1.39      1.39  count.py:1:count1
+  0.00      5.49      0.00  run-statprof:2:&lt;module&gt;
+---
+Sample count: 296
+Total time: 5.490000 seconds
+</pre>
+<div class="section">
+<h2><a id="which-profiler-should-you-use" name="which-profiler-should-you-use">Which profiler should you use?</a></h2>
+<p>statprof used to report more accurate numbers than hotshot or
+cProfile, because hotshot and cProfile had to instrument the code
+(insert tracing statements, basically).  However, the numbers shown
+above are pretty similar to each other and I'm not sure there's much
+of a reason to choose between them any more.  So, I recommend starting
+with cProfile, because it's the officially supported one.</p>
+<p>One note -- none of these profilers really work all that well with
+threads, for a variety of reasons.  You're best off doing performance
+measurements on non-threaded code.</p>
+</div>
+<div class="section">
+<h2><a id="measuring-code-snippets-with-timeit" name="measuring-code-snippets-with-timeit">Measuring code snippets with timeit</a></h2>
+<p>There's also a simple timing tool called timeit:</p>
+<pre class="literal-block">
+from timeit import Timer
+from count import *
+
+t1 = Timer(&quot;count1()&quot;, &quot;from count import count1&quot;)
+print 'count1:', t1.timeit(number=1)
+
+t2 = Timer(&quot;count2()&quot;, &quot;from count import count2&quot;)
+print 'count2:', t2.timeit(number=1)
+</pre>
+</div>
+</div>
+<div class="section">
+<h1><a id="speeding-up-python" name="speeding-up-python">Speeding Up Python</a></h1>
+<p>There are a couple of options for speeding up Python.</p>
+<div class="section">
+<h2><a id="psyco" name="psyco">psyco</a></h2>
+<p>(Taken almost verbatim from the <a class="reference" href="http://psyco.sourceforge.net/introduction.html">psyco introduction</a>!)</p>
+<p>psyco is a specializing compiler that lets you run your existing
+Python code much faster, with <em>absolutely no change</em> in your source
+code.  It acts like a just-in-time compiler by rewriting several
+versions of your code blocks and then optimizing them by specializing
+the variables they use.</p>
+<p>The main benefit is that you get a 2-100x speed-up with an unmodified Python
+interpreter and unmodified source code.  (You just need to import psyco.)</p>
+<p>The main drawbacks are that it only runs on i386-compatible processors
+(so, not PPC Macs) and it's a bit of a memory hog.</p>
+<p>For example, if you use the prime number generator generator code (see
+<a class="reference" href="idiomatic-python.txt">Idiomatic Python</a>) to generate all primes
+under 100000, it takes about 10.4 seconds on my development server.
+With psyco, it takes about 1.6 seconds (that's about a 6x speedup).
+Even when doing less numerical stuff, I see at least a 2x speedup.</p>
+<div class="section">
+<h3><a id="installing-psyco" name="installing-psyco">Installing psyco</a></h3>
+<p>(Note: psyco is an extension module and does not come in pre-compiled
+form.  Therefore, you will need to have a Python-compatible C compiler
+installed in order to install psyco.)</p>
+<p>Grab the latest psyco snapshot from here:</p>
+<pre class="literal-block">
+http://psyco.sourceforge.net/psycoguide/sources.html
+</pre>
+<p>unpack it, and run 'python setup.py install'.</p>
+</div>
+<div class="section">
+<h3><a id="using-psyco" name="using-psyco">Using psyco</a></h3>
+<p>Put the following code at the top of your __main__ Python script:</p>
+<pre class="literal-block">
+try:
+   import psyco
+   psyco.full()
+except ImportError:
+   pass
+</pre>
+<p>...and you're done.  (Yes, it's magic!)</p>
+<p>The only place where psyco won't help you much is when you have
+already recoded the CPU-intensive component of your code into an
+extension module.</p>
+</div>
+</div>
+<div class="section">
+<h2><a id="pyrex" name="pyrex">pyrex</a></h2>
+<p>pyrex is a Python-like language used to create C modules for Python.
+You can use it for two purposes: to increase performance by
+(re)writing your code in C (but with a friendly extension language),
+and to make C libraries available to Python.</p>
+<p>In the context of speeding things up, here's an example program:</p>
+<pre class="literal-block">
+def primes(int maxprime):
+  cdef int n, k, i
+  cdef int p[100000]
+  result = []
+  k = 0
+  n = 2
+  while n &lt; maxprime:
+    i = 0
+
+    # test against previous primes
+    while i &lt; k and n % p[i] &lt;&gt; 0:
+      i = i + 1
+
+    # prime? if so, save.
+    if i == k:
+      p[k] = n
+      k = k + 1
+      result.append(n)
+    n = n + 1
+
+  return result
+</pre>
+<p>To compile this, you would execute:</p>
+<pre class="literal-block">
+pyrexc primes.pyx
+gcc -c -fPIC -I /usr/local/include/python2.5 primes.c
+gcc -shared primes.o -o primes.so
+</pre>
+<p>Or, more nicely, you can write a setup.py using some of the Pyrex
+helper functions:</p>
+<pre class="literal-block">
+from distutils.core import setup
+from distutils.extension import Extension
+from Pyrex.Distutils import build_ext                # &lt;--
+
+setup(
+  name = &quot;primes&quot;,
+  ext_modules=[
+    Extension(&quot;primes&quot;, [&quot;primes.pyx&quot;], libraries = [])
+    ],
+  cmdclass = {'build_ext': build_ext}
+)
+</pre>
+<p>A few notes:</p>
+<blockquote>
+<ul class="simple">
+<li>'cdef' is a C definition statement</li>
+<li>this is a &quot;python-alike&quot; language but not Python, per se ;)</li>
+<li>pyrex does handle a lot of the nasty C extension stuff for you.</li>
+</ul>
+</blockquote>
+<p>There's an excellent guide to Pyrex available online here:
+<a class="reference" href="http://ldots.org/pyrex-guide/">http://ldots.org/pyrex-guide/</a>.</p>
+<p>I haven't used Pyrex much myself, but I have a friend who swears by
+it.  My concerns are that it's a &quot;C/Python-alike&quot; language but not C
+or Python, and I have already memorized too many weird rules about too
+many languages!</p>
+<p>We'll encounter Pyrex a bit further down the road in the context of
+linking existing C/C++ code into your own code.</p>
+<!-- @CTB will we?? ;) -->
+</div>
+</div>
+</div>
+</body>
+</html>

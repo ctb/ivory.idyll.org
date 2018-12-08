@@ -1,0 +1,185 @@
+<STYLE type="text/css">
+
+maintext
+{
+font-family: verdana, arial, 'sans serif';
+font-size: 95%
+}
+
+.TableListLarge
+{
+    COLOR: navy;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: large;
+    FONT-WEIGHT: bold;
+    LINE-HEIGHT: normal
+}
+.TableListMedium
+{
+    COLOR: navy;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: small;
+    FONT-WEIGHT: bold;
+    LINE-HEIGHT: normal
+}
+.TableListSmall
+{
+    COLOR: navy;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: xx-small;
+    FONT-WEIGHT: bold;
+    LINE-HEIGHT: normal
+}
+.dateline
+{
+    COLOR: navy;
+    FONT: x-small Arial, Helvetica, sans-serif;
+    TEXT-DECORATION: none;
+    TEXT-TRANSFORM: none
+}
+.byline
+{
+    COLOR: navy;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: x-small;
+    FONT-STYLE: italic;
+    FONT-WEIGHT: normal
+}
+.coolMenu
+{
+    COLOR: navy;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: small;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal;
+    LEFT: 0em;
+    LINE-HEIGHT: normal;
+    MARGIN-LEFT: 0px;
+    PADDING-LEFT: 0px;
+    POSITION: relative;
+    TEXT-DECORATION: none
+}
+.warmMenu
+{
+    COLOR: red;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: small;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal;
+    LEFT: 0em;
+    POSITION: relative;
+    TEXT-DECORATION: none
+}
+.coolMenu1
+{
+    COLOR: navy;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 12pt;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal;
+    LEFT: 2em;
+    LINE-HEIGHT: normal;
+    POSITION: relative;
+    TEXT-DECORATION: none
+}
+.warmMenu1
+{
+    COLOR: red;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 12pt;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal;
+    LEFT: 2em;
+    LINE-HEIGHT: normal;
+    POSITION: relative;
+    TEXT-DECORATION: none
+}
+.coolMenu2
+{
+    COLOR: navy;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal;
+    LEFT: 3em;
+    POSITION: relative;
+    TEXT-DECORATION: none
+}
+.warmMenu2
+{
+    COLOR: red;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal;
+    LEFT: 3em;
+    POSITION: relative;
+    TEXT-DECORATION: none
+}
+.listplayer
+{
+    COLOR: navy;
+    FONT-FAMILY: Arial, Helvetica, 'sans serif';
+    FONT-SIZE: 8pt
+}
+.listTitle
+{
+    COLOR: navy;
+    FONT-FAMILY: Arial, Helvetica, 'sans seriph';
+    FONT-SIZE: 8pt;
+    FONT-WEIGHT: bold
+}
+.pagetitle
+{
+    COLOR: navy;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 14pt;
+    FONT-WEIGHT: bold;
+    TEXT-DECORATION: none
+}
+.formlabel
+{
+    COLOR: navy;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 8pt;
+    FONT-WEIGHT: bold;
+    TEXT-DECORATION: none
+}
+.formtext
+{
+    COLOR: navy;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 12pt;
+    FONT-WEIGHT: normal;
+    TEXT-DECORATION: none
+}
+.formtitle
+{
+    COLOR: navy;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 14pt;
+    FONT-WEIGHT: bold;
+    TEXT-DECORATION: none
+}
+.formlink
+{
+    COLOR: mediumblue;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: x-small;
+    FONT-WEIGHT: bold;
+    TEXT-DECORATION: none
+}
+.cnumeral
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 12px;
+    FONT-WEIGHT: bold;
+    TEXT-ALIGN: center;
+    WIDTH: 30px
+}
+
+
+
+
+

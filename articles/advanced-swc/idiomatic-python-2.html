@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Idiomatic Python revisited</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="idiomatic-python-revisited">
+<h1 class="title">Idiomatic Python revisited</h1>
+<div class="section">
+<h1><a id="sets" name="sets">sets</a></h1>
+<p>Sets recently (2.4?) migrated from a stdlib component into a default type.
+They're exactly what you think: unordered collections of values.</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; s = set((1, 2, 3, 4, 5))
+&gt;&gt;&gt; t = set((4, 5, 6))
+&gt;&gt;&gt; print s
+set([1, 2, 3, 4, 5])
+</pre>
+<p>You can union and intersect them:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; print s.union(t)
+set([1, 2, 3, 4, 5, 6])
+&gt;&gt;&gt; print s.intersection(t)
+set([4, 5])
+</pre>
+<p>And you can also check for supersets and subsets:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; u = set((4, 5, 6, 7))
+&gt;&gt;&gt; print t.issubset(u)
+True
+&gt;&gt;&gt; print u.issubset(t)
+False
+</pre>
+<p>One more note: you can convert between sets and lists pretty easily:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; sl = list(s)
+&gt;&gt;&gt; ss = set(sl)
+</pre>
+</div>
+<div class="section">
+<h1><a id="any-and-all" name="any-and-all"><tt class="docutils literal"><span class="pre">any</span></tt> and <tt class="docutils literal"><span class="pre">all</span></tt></a></h1>
+<p><tt class="docutils literal"><span class="pre">all</span></tt> and <tt class="docutils literal"><span class="pre">any</span></tt> are two new functions in Python that work with iterables
+(e.g. lists, generators, etc.).  <tt class="docutils literal"><span class="pre">any</span></tt> returns True if <em>any</em> element of
+the iterable is True (and False otherwise); <tt class="docutils literal"><span class="pre">all</span></tt> returns True if <em>all</em>
+elements of the iterable are True (and False otherwise).</p>
+<p>Consider:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; x = [ True, False ]
+&gt;&gt;&gt; print any(x)
+True
+&gt;&gt;&gt; print all(x)
+False
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; y = [ True, True ]
+&gt;&gt;&gt; print any(y)
+True
+&gt;&gt;&gt; print all(y)
+True
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; z = [ False, False ]
+&gt;&gt;&gt; print any(z)
+False
+&gt;&gt;&gt; print all(z)
+False
+</pre>
+</div>
+<div class="section">
+<h1><a id="exceptions-and-exception-hierarchies" name="exceptions-and-exception-hierarchies">Exceptions and exception hierarchies</a></h1>
+<p>You're all familiar with exception handling using try/except:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; x = [1, 2, 3, 4, 5]
+&gt;&gt;&gt; x[10]
+Traceback (most recent call last):
+   ...
+IndexError: list index out of range
+</pre>
+<p>You can catch all exceptions quite easily:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; try:
+...   y = x[10]
+... except:
+...   y = None
+</pre>
+<p>but this is considered bad form, because of the potential for over-broad
+exception handling:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; try:
+...   y = x[&quot;10&quot;]
+... except:
+...   y = None
+</pre>
+<p>In general, try to catch the exception most specific to your code:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; try:
+...   y = x[10]
+... except IndexError:
+...   y = None
+</pre>
+<p>...because then you will see the errors you didn't plan for:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; try:
+...   y = x[&quot;10&quot;]
+... except IndexError:
+...   y = None
+Traceback (most recent call last):
+   ...
+TypeError: list indices must be integers
+</pre>
+<p>Incidentally, you can re-raise exceptions, potentially after doing
+something else:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; try:
+...   y = x[10]
+... except IndexError:
+...   # do something else here #
+...   raise
+Traceback (most recent call last):
+   ...
+IndexError: list index out of range
+</pre>
+<p>There are some special exceptions to be aware of.  Two that I run into a lot
+are SystemExit and KeyboardInterrupt.  KeyboardInterrupt is what is raised
+when a CTRL-C interrupts Python; you can handle it and exit gracefully if
+you like, e.g.</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; try:
+...   # do_some_long_running_task()
+...   pass
+... except KeyboardInterrupt:
+...   sys.exit(0)
+</pre>
+<p>which is sometimes nice for things like Web servers (more on that tomorrow).</p>
+<p>SystemExit is also pretty useful.  It's actually an exception raised by
+<tt class="docutils literal"><span class="pre">sys.exit</span></tt>, i.e.</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; try:
+...   sys.exit(0)
+... except SystemExit:
+...   pass
+</pre>
+<p>means that sys.exit has no effect!  You can also raise SystemExit instead
+of calling sys.exit, e.g.</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; raise SystemExit(0)
+Traceback (most recent call last):
+   ...
+SystemExit: 0
+</pre>
+<p>is equivalent to <tt class="docutils literal"><span class="pre">sys.exit(0)</span></tt>:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; sys.exit(0)
+Traceback (most recent call last):
+   ...
+SystemExit: 0
+</pre>
+<p>Another nice feature of exceptions is exception hierarchies.
+Exceptions are just classes that derive from <tt class="docutils literal"><span class="pre">Exception</span></tt>, and you
+can catch exceptions based on their base classes.  So, for example,
+you can catch most standard errors by catching the StandardError
+exception, from which e.g. IndexError inherits:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; print issubclass(IndexError, StandardError)
+True
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; try:
+...   y = x[10]
+... except StandardError:
+...   y = None
+</pre>
+<p>You can also catch some exceptions more specifically than others.  For
+example, KeyboardInterrupt inherits from Exception, and some times you
+want to catch KeyboardInterrupts while ignoring all other exceptions:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; try:
+...   # ...
+...   pass
+... except KeyboardInterrupt:
+...   raise
+... except Exception:
+...   pass
+</pre>
+<p>Note that if you want to print out the error, you can do coerce a string
+out of the exception to present to the user:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; try:
+...   y = x[10]
+... except Exception, e:
+...   print 'CAUGHT EXCEPTION!', str(e)
+CAUGHT EXCEPTION! list index out of range
+</pre>
+<p>Last but not least, you can define your own exceptions and exception
+hierarchies:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; class MyFavoriteException(Exception):
+...   pass
+&gt;&gt;&gt; raise MyFavoriteException
+Traceback (most recent call last):
+   ...
+MyFavoriteException
+</pre>
+<p>I haven't used this much myself, but it is invaluable when you are writing
+packages that have a lot of different detailed exceptions that you might
+want to let users handle.</p>
+<p>(By default, I usually raise a simple Exception in my own code.)</p>
+<p>Oh, one more note: AssertionError.  Remember assert?</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; assert 0
+Traceback (most recent call last):
+   ...
+AssertionError
+</pre>
+<p>Yep, it raises an AssertionError that you can catch, if you REALLY want to...</p>
+</div>
+<div class="section">
+<h1><a id="function-decorators" name="function-decorators">Function Decorators</a></h1>
+<p>Function decorators are a strange beast that I tend to use only in my
+testing code and not in my actual application code.  Briefly, function
+decorators are functions that take functions as arguments, and return
+other functions.  Confused?  Let's see a simple example that makes
+sure that no keyword argument named 'something' ever gets passed into
+a function:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def my_decorator(fn):
+...
+...   def new_fn(*args, **kwargs):
+...      if 'something' in kwargs:
+...         print 'REMOVING', kwargs['something']
+...         del kwargs['something']
+...      return fn(*args, **kwargs)
+...
+...   return new_fn
+</pre>
+<p>To apply this decorator, use this funny &#64; syntax:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; &#64;my_decorator
+... def some_function(a=5, b=6, something=None, c=7):
+...   print a, b, something, c
+</pre>
+<p>OK, now <tt class="docutils literal"><span class="pre">some_function</span></tt> has been invisibly replaced with the result of
+<tt class="docutils literal"><span class="pre">my_decorator</span></tt>, which is going to be <tt class="docutils literal"><span class="pre">new_fn</span></tt>.  Let's see the result:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; some_function(something='MADE IT')
+REMOVING MADE IT
+5 6 None 7
+</pre>
+<p>Mind you, without the decorator, the function does exactly what you expect:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def some_function(a=5, b=6, something=None, c=7):
+...   print a, b, something, c
+&gt;&gt;&gt; some_function(something='MADE IT')
+5 6 MADE IT 7
+</pre>
+<p>OK, so this is a bit weird.  What possible uses are there for this??</p>
+<p>Here are three example uses:</p>
+<p>First, synchronized functions like in Java.  Suppose you had a bunch
+of functions (f1, f2, f3...) that could not be called concurrently, so
+you wanted to play locks around them.  You could do this with decorators:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; import threading
+&gt;&gt;&gt; def synchronized(fn):
+...   lock = threading.Lock()
+...
+...   def new_fn(*args, **kwargs):
+...      lock.acquire()
+...      print 'lock acquired'
+...      result = fn(*args, **kwargs)
+...      lock.release()
+...      print 'lock released'
+...      return result
+...
+...   return new_fn
+</pre>
+<p>and then when you define your functions, they will be locked:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; &#64;synchronized
+... def f1():
+...   print 'in f1'
+&gt;&gt;&gt; f1()
+lock acquired
+in f1
+lock released
+</pre>
+<p>Second, adding attributes to functions.  (This is why I use them in my testing
+code sometimes.)</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def attrs(**kwds):
+...    def decorate(f):
+...        for k in kwds:
+...            setattr(f, k, kwds[k])
+...        return f
+...    return decorate
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; &#64;attrs(versionadded=&quot;2.2&quot;,
+...       author=&quot;Guido van Rossum&quot;)
+... def mymethod(f):
+...    pass
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; print mymethod.versionadded
+2.2
+&gt;&gt;&gt; print mymethod.author
+Guido van Rossum
+</pre>
+<p>Third, memoize/caching of results.  Here's a really simple example; you can
+find much more general ones online, in particular on the <a class="reference" href="http://www.activestate.com/ASPN/Python/Cookbook/">Python Cookbook
+site</a>.</p>
+<p>Imagine that you have a CPU-expensive one-parameter function:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def expensive(n):
+...   print 'IN EXPENSIVE', n
+...   # do something expensive here, like calculate n'th prime
+</pre>
+<p>You could write a caching decorator to wrap this function and record
+results transparently:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def simple_cache(fn):
+...   cache = {}
+...
+...   def new_fn(n):
+...      if n in cache:
+...         print 'FOUND IN CACHE; RETURNING'
+...         return cache[n]
+...
+...      # otherwise, call function &amp; record value
+...      val = fn(n)
+...      cache[n] = val
+...      return val
+...
+...   return new_fn
+</pre>
+<p>Then use this as a decorator to wrap the expensive function:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; &#64;simple_cache
+... def expensive(n):
+...   print 'IN THE EXPENSIVE FN:', n
+...   return n**2
+</pre>
+<p>Now, when you call this function twice with the same argument, if will
+only do the calculation once; the second time, the function call will be
+intercepted and the cached value will be returned.</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; expensive(55)
+IN THE EXPENSIVE FN: 55
+3025
+&gt;&gt;&gt; expensive(55)
+FOUND IN CACHE; RETURNING
+3025
+</pre>
+<p>Check out Michele Simionato's writeup of decorators <a class="reference" href="http://www.phyast.pitt.edu/~micheles/python/documentation.html">here</a>
+for lots more information on decorators.</p>
+</div>
+<div class="section">
+<h1><a id="try-finally" name="try-finally">try/finally</a></h1>
+<p>Finally, we come to try/finally!</p>
+<p>The syntax of try/finally is just like try/except:</p>
+<pre class="literal-block">
+try:
+   do_something()
+finally:
+   do_something_else()
+</pre>
+<p>The purpose of try/finally is to ensure that something is done, whether or
+not an exception is raised:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; x = [0, 1, 2]
+&gt;&gt;&gt; try:
+...   y = x[5]
+... finally:
+...   x.append('something')
+Traceback (most recent call last):
+   ...
+IndexError: list index out of range
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; print x
+[0, 1, 2, 'something']
+</pre>
+<p>(It's actually semantically equivalent to:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; try:
+...   y = x[5]
+... except IndexError:
+...   x.append('something')
+...   raise
+Traceback (most recent call last):
+   ...
+IndexError: list index out of range
+</pre>
+<p>but it's a bit cleaner, because the exception doesn't have to be re-raised
+and you don't have to catch a specific exception type.)</p>
+<p>Well, why do you need this?  Let's think about locking.  First, get a lock:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; import threading
+&gt;&gt;&gt; lock = threading.Lock()
+</pre>
+<p>Now, if you're locking something, you want to be darn sure to <em>release</em>
+that lock.  But what if an exception is raised right in the middle?</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def fn():
+...    print 'acquiring lock'
+...    lock.acquire()
+...    y = x[5]
+...    print 'releasing lock'
+...    lock.release()
+&gt;&gt;&gt; try:
+...    fn()
+... except IndexError:
+...   pass
+acquiring lock
+</pre>
+<p>Note that 'releasing lock' is never printed: 'lock' is now left in a
+locked state, and next time you run 'fn' you will hang the program
+forever.  Oops.</p>
+<p>You can fix this with try/finally:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; lock = threading.Lock()             # gotta trash the previous lock, or hang!
+&gt;&gt;&gt; def fn():
+...    print 'acquiring lock'
+...    lock.acquire()
+...    try:
+...       y = x[5]
+...    finally:
+...       print 'releasing lock'
+...       lock.release()
+&gt;&gt;&gt; try:
+...   fn()
+... except IndexError:
+...   pass
+acquiring lock
+releasing lock
+</pre>
+</div>
+<div class="section">
+<h1><a id="function-arguments-and-wrapping-functions" name="function-arguments-and-wrapping-functions">Function arguments, and wrapping functions</a></h1>
+<p>You may have noticed above (in the section on decorators) that we wrapped
+functions using this notation:</p>
+<pre class="literal-block">
+def wrapper_fn(*args, **kwargs):
+    return fn(*args, **kwargs)
+</pre>
+<p>(This takes the place of the old 'apply'.)  What does this do?</p>
+<p>Here, *args assigns all of the positional arguments to a tuple
+'args', and '**kwargs' assigns all of the keyword arguments to a
+dictionary 'kwargs':</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def print_me(*args, **kwargs):
+...   print 'args is:', args
+...   print 'kwargs is:', kwargs
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; print_me(5, 6, 7, test='me', arg2=None)
+args is: (5, 6, 7)
+kwargs is: {'test': 'me', 'arg2': None}
+</pre>
+<p>When a function is called with this notation, the args and kwargs are
+unpacked appropriately and passed into the function.  For example,
+the function <tt class="docutils literal"><span class="pre">test_call</span></tt></p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def test_call(a, b, c, x=1, y=2, z=3):
+...   print a, b, c, x, y, z
+</pre>
+<p>can be called with a tuple of three args (matching 'a', 'b', 'c'):</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; tuple_in = (5, 6, 7)
+&gt;&gt;&gt; test_call(*tuple_in)
+5 6 7 1 2 3
+</pre>
+<p>with some optional keyword args:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; d = { 'x' : 'hello', 'y' : 'world' }
+&gt;&gt;&gt; test_call(*tuple_in, **d)
+5 6 7 hello world 3
+</pre>
+<p>Incidentally, this lets you implement the 'dict' constructor in one
+line!</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def dict_replacement(**kwargs):
+...    return kwargs
+</pre>
+</div>
+</div>
+</body>
+</html>

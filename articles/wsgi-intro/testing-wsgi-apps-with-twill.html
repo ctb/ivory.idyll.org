@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.3.9: http://docutils.sourceforge.net/" />
+<title>Testing WSGI Apps with twill</title>
+<link rel="stylesheet" href="default.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="testing-wsgi-apps-with-twill">
+<h1 class="title">Testing WSGI Apps with twill</h1>
+<p>One of the particularly useful aspects of having a standard interface
+to Python Web apps is that it lets you build standard test harnesses,
+too.  I've done just that with <a class="reference" href="http://www.idyll.org/~t/www-tools/">twill</a>, using <a class="reference" href="http://darcs.idyll.org/~t/projects/wsgi_intercept/README.html">wsgi_intercept</a>, a
+library which lets you &quot;mock&quot; the network interface so that you can
+run and test WSGI apps in-process.</p>
+<div class="section" id="twill-and-basic-wsgi-intercept">
+<h1><a name="twill-and-basic-wsgi-intercept">twill and basic wsgi_intercept</a></h1>
+<p>For example, this code:</p>
+<pre class="literal-block">
+#! /usr/bin/env python
+import twill
+
+def simple_app(environ, start_response):
+   status = '200 OK'
+   response_headers = [('Content-type','text/plain')]
+   start_response(status, response_headers)
+   return ['Hello world!\n']
+
+if __name__ == '__main__':
+   print '*** installing WSGI intercept hook ***\n'
+   twill.add_wsgi_intercept('localhost', 80, lambda: simple_app)
+   twill.shell.main()
+</pre>
+<p>lets you browse a Web app directly:</p>
+<pre class="literal-block">
+% ./twill-wsgi-example.py -u http://localhost:80/
+*** installing WSGI intercept hook ***
+==&gt; at http://localhost:80/
+
+ -= Welcome to twill! =-
+
+current page: http://localhost:80/
+&gt;&gt; show
+Hello world!
+</pre>
+<p>or run a script, for example this script, <tt class="docutils literal"><span class="pre">hello-test.twill</span></tt>,</p>
+<pre class="literal-block">
+code 200
+find Hello
+</pre>
+<p>produces this output:</p>
+<pre class="literal-block">
+% ./twill-wsgi-example.py -u http://localhost:80/ hello-test.twill
+*** installing WSGI intercept hook ***
+&gt;&gt; EXECUTING FILE hello-test.twill
+==&gt; at http://localhost:80
+--
+1 of 1 files SUCCEEDED.
+</pre>
+<p><a class="reference" href="twill-wsgi-example.py">[download]</a></p>
+</div>
+<div class="section" id="twill-and-doctest">
+<h1><a name="twill-and-doctest">twill and doctest</a></h1>
+<p>You should even be able to put twill commands into doctests:</p>
+<pre class="literal-block">
+def simple_app(environ, start_response):
+    &quot;&quot;&quot;
+    It may even be possible to use wsgi_intercept with doctest.
+    For example,
+
+    &gt;&gt;&gt; twill.add_wsgi_intercept('localhost', 80, lambda: simple_app)
+    &gt;&gt;&gt; go(&quot;http://localhost:80/&quot;)
+    ==&gt; at http://localhost:80/
+    &gt;&gt;&gt; show()
+    Hello world!
+
+    Unfortunately this doesn't actually work, for reasons that I'm sure
+    Grig will solve.
+    &quot;&quot;&quot;
+
+    status = '200 OK'
+    response_headers = [('Content-type','text/plain')]
+    start_response(status, response_headers)
+    return ['Hello world!\n']
+</pre>
+<p><a class="reference" href="twill-wsgi-doctest.py">[download]</a></p>
+<p>Now tell me that wouldn't be neat!  (Unfortunately it doesn't <em>work</em> just
+yet, but I'll figure that out...)</p>
+</div>
+</div>
+</body>
+</html>

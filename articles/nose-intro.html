@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>An Extended Introduction to the nose Unit Testing Framework</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="an-extended-introduction-to-the-nose-unit-testing-framework">
+<h1 class="title">An Extended Introduction to the nose Unit Testing Framework</h1>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#what-are-unit-tests" id="id1" name="id1">What are unit tests?</a></li>
+<li><a class="reference" href="#why-use-a-framework-and-why-nose" id="id2" name="id2">Why use a framework? (and why nose?)</a></li>
+<li><a class="reference" href="#a-few-simple-examples" id="id3" name="id3">A few simple examples</a><ul>
+<li><a class="reference" href="#test-fixtures" id="id4" name="id4">Test fixtures</a></li>
+<li><a class="reference" href="#examples-are-included" id="id5" name="id5">Examples are included!</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#a-somewhat-more-complete-guide-to-test-discovery-and-execution" id="id6" name="id6">A somewhat more complete guide to test discovery and execution</a><ul>
+<li><a class="reference" href="#running-tests" id="id7" name="id7">Running tests</a></li>
+<li><a class="reference" href="#debugging-test-discovery" id="id8" name="id8">Debugging test discovery</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#the-nose-command-line" id="id9" name="id9">The nose command line</a><ul>
+<li><a class="reference" href="#w-specifying-the-working-directory" id="id10" name="id10">-w: Specifying the working directory</a></li>
+<li><a class="reference" href="#s-not-capturing-stdout" id="id11" name="id11">-s: Not capturing stdout</a></li>
+<li><a class="reference" href="#v-info-and-debugging-output" id="id12" name="id12">-v: Info and debugging output</a></li>
+<li><a class="reference" href="#specifying-a-list-of-tests-to-run" id="id13" name="id13">Specifying a list of tests to run</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#running-doctests-in-nose" id="id14" name="id14">Running doctests in nose</a></li>
+<li><a class="reference" href="#the-attrib-plug-in-selectively-running-subsets-of-tests" id="id15" name="id15">The 'attrib' plug-in -- selectively running subsets of tests</a></li>
+<li><a class="reference" href="#running-nose-programmatically" id="id16" name="id16">Running nose programmatically</a></li>
+<li><a class="reference" href="#writing-plug-ins-a-simple-guide" id="id17" name="id17">Writing plug-ins -- a simple guide</a></li>
+<li><a class="reference" href="#nose-caveats-let-the-buyer-beware-occasionally" id="id18" name="id18">nose caveats -- let the buyer beware, occasionally</a></li>
+<li><a class="reference" href="#credits-legalese" id="id19" name="id19">Credits &amp; Legalese</a></li>
+</ul>
+</div>
+<p>Welcome! This is an introduction, with lots and lots of examples, to the
+<a class="reference" href="http://somethingaboutorange.com/mrl/projects/nose/">nose</a> unit test discovery &amp; execution framework.  If that's not what
+you want to read, I suggest you hit the Back button now.</p>
+<p>The latest version of this document can be found at</p>
+<blockquote>
+<a class="reference" href="http://ivory.idyll.org/articles/nose-intro.html">http://ivory.idyll.org/articles/nose-intro.html</a></blockquote>
+<p>(Last modified October 2006.)</p>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="what-are-unit-tests" name="what-are-unit-tests">What are unit tests?</a></h1>
+<p>A unit test is an automated code-level test for a small &quot;unit&quot; of
+functionality.  Unit tests are often designed to test a broad range of the
+expected functionality, including any weird corner cases and some
+tests that <em>should not</em> work.  They tend to interact minimally with
+external resources like the disk, the network, and databases; testing
+code that accesses these resources is usually put under functional
+tests, regression tests, or integration tests.</p>
+<p>(There's lots of discussion on whether unit tests should do things
+like access external resources, and whether or not they are still
+&quot;unit&quot; tests if they do.  The arguments are fun to read, and I
+encourage you to read them.  I'm going to stick with a fairly
+pragmatic and broad definition: anything that exercises a small, fairly
+isolated piece of functionality is a unit test.)</p>
+<p>Unit tests are almost always pretty simple, by intent; for example, if
+you wanted to test an (intentionally naive) regular expression for
+validating the form of e-mail addresses, your test might look something
+like this:</p>
+<pre class="literal-block">
+EMAIL_REGEXP = r'[\S.]+&#64;[\S.]+'
+
+def test_email_regexp():
+   # a regular e-mail address should match
+   assert re.match(EMAIL_REGEXP, 'test&#64;nowhere.com')
+
+   # no domain should fail
+   assert not re.match(EMAIL_REGEXP, 'test&#64;')
+</pre>
+<p>There are a couple of ways to integrate unit tests into your
+development style. These include Test Driven Development, where unit
+tests are written prior to the functionality they're testing; during
+refactoring, where existing code -- sometimes code without any
+automated tests to start with -- is retrofitted with unit tests as
+part of the refactoring process; bug fix testing, where bugs are first
+pinpointed by a targetted test and then fixed; and straight test
+enhanced development, where tests are written organically as the code
+evolves.  In the end, I think it matters more that you're writing unit
+tests than it does exactly how you write them.</p>
+<p>For me, the most important part of having unit tests is that they can
+be run <em>quickly</em>, <em>easily</em>, and <em>without any thought</em> by developers.
+They serve as executable, enforceable documentation for function and
+API, and they also serve as an invaluable reminder of bugs you've
+fixed in the past.  As such, they improve my ability to more quickly
+deliver functional code -- and that's really the bottom line.</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id2" id="why-use-a-framework-and-why-nose" name="why-use-a-framework-and-why-nose">Why use a framework? (and why nose?)</a></h1>
+<p>It's pretty common to write tests for a library module like so:</p>
+<pre class="literal-block">
+def test_me():
+   # ... many tests, which raise an Exception if they fail ...
+
+if __name__ == '__main__':
+   test_me()
+</pre>
+<p>The 'if' statement is a little hook that runs the tests when the module
+is executed as a script from the command line.  This is great, and fulfills
+the goal of having automated tests that can be run easily.  Unfortunately,
+they <em>cannot be run without thought</em>, which is an amazingly important and
+oft-overlooked requirement for automated tests!  In practice, this means
+that they will only be run when that module is being worked on -- a big
+problem.</p>
+<p>People use unit test discovery and execution frameworks so that they
+can add tests to existing code, execute those tests, and get a simple
+report, without thinking.  Below, you'll see some of the advantages
+that using such a framework gives you: in addition to finding and
+running your tests, frameworks can let you selectively execute
+certain tests, capture and collate error output, and add coverage and
+profiling information.  (You can always write your own framework --
+but why not take advantage of someone else's, even if they're not as
+smart as you?)</p>
+<p>&quot;Why use nose in particular?&quot; is a more difficult question.  There are
+many unit test frameworks in Python, and more arise every day.  I
+personally use nose, and it fits my needs fairly well.  In particular,
+it's actively developed, by a guy (Jason Pellerin) who answers his
+e-mail pretty quickly; it's fairly stable (it's in beta at the time of
+this writing); it has a really fantastic plug-in architecture that lets
+me extend it in convenient ways; it integrates well with distutils;
+it can be adapted to mimic any <em>other</em> unit test discovery framework
+pretty easily; and it's being used by a number of big projects, which
+means it'll probably still be around in a few years.</p>
+<p>I hope the best reason <em>for you</em> to use nose will be that I'm giving
+you this extended introduction ;).</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id3" id="a-few-simple-examples" name="a-few-simple-examples">A few simple examples</a></h1>
+<p>First, install nose.  Using <a class="reference" href="http://peak.telecommunity.com/DevCenter/setuptools">setuptools</a>, this is easy:</p>
+<pre class="literal-block">
+easy_install nose
+</pre>
+<p>Now let's start with a few examples.  Here's the simplest nose test you
+can write:</p>
+<pre class="literal-block">
+def test_b():
+    assert 'b' == 'b'
+</pre>
+<p>Put this in a file called <tt class="docutils literal"><span class="pre">test_me.py</span></tt>, and then run <tt class="docutils literal"><span class="pre">nosetests</span></tt>.
+You will see this output:</p>
+<pre class="literal-block">
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+OK
+</pre>
+<p>If you want to see exactly what test was run, you can use <tt class="docutils literal"><span class="pre">nosetests</span> <span class="pre">-v</span></tt>.</p>
+<pre class="literal-block">
+test_stuff.test_b ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.015s
+
+OK
+</pre>
+<p>Here's a more complicated example.</p>
+<pre class="literal-block">
+class TestExampleTwo:
+    def test_c(self):
+        assert 'c' == 'c'
+</pre>
+<p>Here, nose will first create an object of type <tt class="docutils literal"><span class="pre">TestExampleTwo</span></tt>, and
+only <em>then</em> run <tt class="docutils literal"><span class="pre">test_c</span></tt>:</p>
+<pre class="literal-block">
+test_stuff.TestExampleTwo.test_c ... ok
+</pre>
+<p>Most new test functions you write should look like either of these tests --
+a simple test function, or a class containing one or more test functions.
+But don't worry -- if you have some old tests that you ran with <tt class="docutils literal"><span class="pre">unittest</span></tt>,
+you can still run them.  For example, this test:</p>
+<pre class="literal-block">
+class ExampleTest(unittest.TestCase):
+    def test_a(self):
+        self.assert_(1 == 1)
+</pre>
+<p>still works just fine:</p>
+<pre class="literal-block">
+test_a (test_stuff.ExampleTest) ... ok
+</pre>
+<div class="section">
+<h2><a class="toc-backref" href="#id4" id="test-fixtures" name="test-fixtures">Test fixtures</a></h2>
+<p>A fairly common pattern for unit tests is something like this:</p>
+<pre class="literal-block">
+def test():
+   setup_test()
+   try:
+      do_test()
+      make_test_assertions()
+   finally:
+      cleanup_after_test()
+</pre>
+<p>Here, <tt class="docutils literal"><span class="pre">setup_test</span></tt> is a function that creates necessary objects,
+opens database connections, finds files, etc. -- anything that
+establishes necessary preconditions for the test.  Then <tt class="docutils literal"><span class="pre">do_test</span></tt>
+and <tt class="docutils literal"><span class="pre">make_test_assertions</span></tt> acually run the test code and check to
+see that the test completed successfully.  Finally -- and independently
+of whether or not the test <em>succeeded</em> -- the preconditions are cleaned
+up, or &quot;torn down&quot;.</p>
+<p>This is such a common pattern for unit tests that most unit test frameworks
+let you define setup and teardown &quot;fixtures&quot; for each test; these fixtures
+are run before and after the test, as in the code sample above.  So, instead
+of the pattern above, you'd do:</p>
+<pre class="literal-block">
+def test():
+   do_test()
+   make_test_assertions()
+
+test.setUp = setup_test
+test.tearDown = cleanup_after_test
+</pre>
+<p>The unit test framework then examines each test function, class, and
+method for fixtures, and runs them appropriately.</p>
+<p>Here's the canonical example of fixtures, used in classes rather than in
+functions:</p>
+<pre class="literal-block">
+class TestClass:
+   def setUp(self):
+      ...
+
+   def tearDown(self):
+      ...
+
+   def test_case_1(self):
+      ...
+
+   def test_case_2(self):
+      ...
+
+   def test_case_3(self):
+      ...
+</pre>
+<p>The code that's actually run by the unit test framework is then</p>
+<pre class="literal-block">
+for test_method in get_test_classes():
+   obj = TestClass()
+   obj.setUp()
+   try:
+      obj.test_method()
+   finally:
+      obj.tearDown()
+</pre>
+<p>That is, for <em>each</em> test case, a new object is created, set up, and torn
+down -- thus approximating the Platonic ideal of running each test in a
+completely new, pristine environment.</p>
+<p>(Fixture, incidentally, comes from the Latin &quot;fixus&quot;, meaning &quot;fixed&quot;.
+The origin of its use in unit testing is not clear to me, but you can
+think of fixtures as permanent appendages of a set of tests, &quot;fixed&quot;
+in place.  The word &quot;fixtures&quot; make more sense when considered as part of a
+test suite than when used on a single test -- one fixture for each <em>set</em> of
+tests.)</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id5" id="examples-are-included" name="examples-are-included">Examples are included!</a></h2>
+<p>All of the example code in this article is available in a .tar.gz file.
+Just download the package at</p>
+<pre class="literal-block">
+http://darcs.idyll.org/~t/projects/nose-demo.tar.gz
+</pre>
+<p>and unpack it somewhere; information on running the examples is in
+each section, below.</p>
+<p>To run the simple examples above, go to the top directory in the
+example distribution and type</p>
+<pre class="literal-block">
+nosetests -w simple/ -v
+</pre>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id6" id="a-somewhat-more-complete-guide-to-test-discovery-and-execution" name="a-somewhat-more-complete-guide-to-test-discovery-and-execution">A somewhat more complete guide to test discovery and execution</a></h1>
+<p>nose is a unit test <strong>discovery</strong> and execution package.  Before it
+can execute any tests, it needs to discover them.  nose has a set of
+rules for discovering tests, and then a fixed protocol for running
+them.  While both can be modified by plugins, for the moment let's
+consider only the default rules.</p>
+<p>nose only looks for tests under the working directory -- normally the
+current directory, unless you specify one with the <tt class="docutils literal"><span class="pre">-w</span></tt> command line
+option.</p>
+<p>Within the working directory, it looks for any directories, files,
+modules, or packages that match the test pattern. [ ... ]  In particular,
+note that packages are recursively scanned for test cases.</p>
+<p>Once a test module or a package is found, it's loaded, the setup
+fixtures are run, and the modules are examined for test functions and
+classes -- again, anything that matches the test pattern.  Any test
+functions are run -- along with associated fixtures -- and test
+classes are also executed.  For each test method in test classes, a
+new object of that type is instantiated, the setup fixture (if any) is
+run, the test method is run, and (if there was a setup fixture) the
+teardown fixture is run.</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id7" id="running-tests" name="running-tests">Running tests</a></h2>
+<p>Here's the basic logic of test running:</p>
+<pre class="literal-block">
+if has_setup_fixture(test):
+   run_setup(test)
+
+try:
+
+   run_test(test)
+
+finally:
+   if has_setup_fixture(test):
+      run_teardown(test)
+</pre>
+<p>Unlike for tests themselves, however, test fixtures on test modules and
+test packages are run only once.  This extends the test logic above to
+this:</p>
+<pre class="literal-block">
+### run module setup fixture
+
+if has_setup_fixture(test_module):
+   run_setup(test_module)
+
+### run all tests
+
+try:
+   for test in get_tests(test_module):
+
+      try:                               ### allow individual tests to fail
+         if has_setup_fixture(test):
+            run_setup(test)
+
+         try:
+
+            run_test(test)
+
+         finally:
+            if has_setup_fixture(test):
+               run_teardown(test)
+      except:
+         report_error()
+
+finally:
+
+   ### run module teardown fixture
+
+   if has_setup_fixture(test_module):
+      run_teardown(test_module)
+</pre>
+<p>A few additional notes:</p>
+<blockquote>
+<ul class="simple">
+<li>if the setup fixture fails, no tests are run and the teardown fixture
+isn't run, either.</li>
+<li>if there is no setup fixture, then the teardown fixture is not run.</li>
+<li>whether or not the tests succeed, the teardown fixture is run.</li>
+<li>all tests are executed even if some of them fail.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id8" id="debugging-test-discovery" name="debugging-test-discovery">Debugging test discovery</a></h2>
+<p>nose can only execute tests that it <em>finds</em>.  If you're creating a new
+test suite, it's relatively easy to make sure that nose finds all your
+tests -- just stick a few <tt class="docutils literal"><span class="pre">assert</span> <span class="pre">0</span></tt> statements in each new module,
+and if nose doesn't kick up an error it's not running those tests!
+It's more difficult when you're retrofitting an existing test suite to
+run inside of nose; in the extreme case, you may need to write a plugin
+or modify the top-level nose logic to find the existing tests.</p>
+<p>The main problem I've run into is that nose will only find tests that
+are properly named <em>and</em> within directory or package hierarchies that
+it's actually traversing!  So placing your test modules under the
+directory <tt class="docutils literal"><span class="pre">my_favorite_code</span></tt> won't work, because nose will not even
+enter that directory.  However, if you make <tt class="docutils literal"><span class="pre">my_favorite_code</span></tt> a
+<em>package</em>, then nose <em>will</em> find your tests because it traverses over
+modules within packages.</p>
+<p>In any case, using the <tt class="docutils literal"><span class="pre">-vv</span></tt> flag gives you verbose output from
+nose's test discovery algorithm.  This will tell you whether or not
+nose is even looking in the right place(s) to find your tests.</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id9" id="the-nose-command-line" name="the-nose-command-line">The nose command line</a></h1>
+<p>Apart from the plugins, there are only a few options that I use
+regularly.</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id10" id="w-specifying-the-working-directory" name="w-specifying-the-working-directory">-w: Specifying the working directory</a></h2>
+<p>nose only looks for tests in one place.  The -w flag lets you specify
+that location; e.g.</p>
+<pre class="literal-block">
+nosetests -w simple/
+</pre>
+<p>will run only those tests in the directory <tt class="docutils literal"><span class="pre">./simple/</span></tt>.</p>
+<p>As of the latest development version (October 2006) you can specify
+multiple working directories on the command line:</p>
+<pre class="literal-block">
+nosetests -w simple/ -w basic/
+</pre>
+<p>See <cite>Running nose programmatically</cite> for an example of how to specify
+multiple working directories using Python, in nose 0.9.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id11" id="s-not-capturing-stdout" name="s-not-capturing-stdout">-s: Not capturing stdout</a></h2>
+<p>By default, nose captures all output and only presents stdout from tests
+that fail.  By specifying '-s', you can turn this behavior off.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id12" id="v-info-and-debugging-output" name="v-info-and-debugging-output">-v: Info and debugging output</a></h2>
+<p>nose is intentionally pretty terse.  If you want to see what tests are
+being run, use '-v'.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id13" id="specifying-a-list-of-tests-to-run" name="specifying-a-list-of-tests-to-run">Specifying a list of tests to run</a></h2>
+<p>nose lets you specify a set of tests on the command line; only tests
+that are <em>both</em> discovered <em>and</em> in this set of tests will be run.
+For example,</p>
+<pre class="literal-block">
+nosetests -w simple tests/test_stuff.py:test_b
+</pre>
+<p>only runs the function <tt class="docutils literal"><span class="pre">test_b</span></tt> found in <tt class="docutils literal"><span class="pre">simple/tests/test_stuff.py</span></tt>.</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id14" id="running-doctests-in-nose" name="running-doctests-in-nose">Running doctests in nose</a></h1>
+<p><a class="reference" href="http://docs.python.org/lib/module-doctest.html">Doctests</a> are a nice way to test individual Python functions in a
+convenient documentation format.  For example, the docstring for
+the function <tt class="docutils literal"><span class="pre">multiply</span></tt>, below, contains a doctest:</p>
+<pre class="literal-block">
+def multiply(a, b):
+  &quot;&quot;&quot;
+  'multiply' multiplies two numbers and returns the result.
+
+  &gt;&gt;&gt; multiply(5, 10)
+  50
+  &gt;&gt;&gt; multiply(-1, 1)
+  -1
+  &gt;&gt;&gt; multiply(0.5, 1.5)
+  0.75
+  &quot;&quot;&quot;
+  return a*b
+</pre>
+<p>The doctest module (part of the Python standard module) scans through
+all of the docstrings in a package or module, executes any line
+starting with a <tt class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></tt>, and compares the actual output with the
+expected output contained in the docstring.</p>
+<p>Typically you run these directly on a module level, using the sort of
+<tt class="docutils literal"><span class="pre">__main__</span></tt> hack I showed above.  The doctest plug-in for nose adds
+doctest discovery into nose -- all non-test packages are scanned for
+doctests, and any doctests are executed along with the rest of the
+tests.</p>
+<p>To use the doctest plug-in, go to the directory containing the modules
+and packages you want searched and do</p>
+<pre class="literal-block">
+nosetests --with-doctest
+</pre>
+<p>All of the doctests will be automatically found and executed.  Some
+example doctests are included with the demo code, under <tt class="docutils literal"><span class="pre">basic</span></tt>; you can run them
+like so:</p>
+<pre class="literal-block">
+% nosetests -w basic/ --with-doctest -v
+doctest of app_package.stuff.function_with_doctest ... ok
+...
+</pre>
+<p>Note that by default nose only looks for doctests in <em>non-test</em>
+code.  You can add <tt class="docutils literal"><span class="pre">--doctest-tests</span></tt> to the command line to search
+for doctests in your test code as well.</p>
+<p>The doctest plugin gives you a nice way to combine your various
+low-level tests (e.g. both unit tests and doctests) within one single
+nose run; it also means that you're less likely to forget about running
+your doctests!</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id15" id="the-attrib-plug-in-selectively-running-subsets-of-tests" name="the-attrib-plug-in-selectively-running-subsets-of-tests">The 'attrib' plug-in -- selectively running subsets of tests</a></h1>
+<p>The attrib extension module lets you flexibly select subsets of tests
+based on test <em>attributes</em> -- literally, Python variables attached
+to individual tests.</p>
+<p>Suppose you had the following code (in <tt class="docutils literal"><span class="pre">attr/test_attr.py</span></tt>):</p>
+<pre class="literal-block">
+def testme1():
+    assert 1
+
+testme1.will_fail = False
+
+def testme2():
+    assert 0
+
+testme2.will_fail = True
+
+def testme3():
+    assert 1
+</pre>
+<p>Using the attrib extension, you can select a subset of these tests
+based on the attribute <tt class="docutils literal"><span class="pre">will_fail</span></tt>.  For example, <tt class="docutils literal"><span class="pre">nosetests</span> <span class="pre">-a</span>
+<span class="pre">will_fail</span></tt> will run only <tt class="docutils literal"><span class="pre">testme2</span></tt>, while <tt class="docutils literal"><span class="pre">nosetests</span> <span class="pre">-a</span>
+<span class="pre">\!will_fail</span></tt> will run both <tt class="docutils literal"><span class="pre">testme1</span></tt> and <tt class="docutils literal"><span class="pre">testme3</span></tt>.  You can also
+specify precise values, e.g. <tt class="docutils literal"><span class="pre">nosetests</span> <span class="pre">-a</span> <span class="pre">will_fail=False</span></tt> will run
+only <tt class="docutils literal"><span class="pre">testme1</span></tt>, because <tt class="docutils literal"><span class="pre">testme3</span></tt> doesn't have the attribute <tt class="docutils literal"><span class="pre">will_fail</span></tt>.</p>
+<p>You can also tag tests with <em>lists</em> of attributes, as in <tt class="docutils literal"><span class="pre">attr/test_attr2.py</span></tt>:</p>
+<pre class="literal-block">
+def testme5():
+    assert 1
+
+testme5.tags = ['a', 'b']
+
+def testme6():
+    assert 1
+
+testme6.tags = ['a', 'c']
+</pre>
+<p>Then <tt class="docutils literal"><span class="pre">nosetests</span> <span class="pre">-a</span> <span class="pre">tags=a</span></tt> will run both <tt class="docutils literal"><span class="pre">testme5</span></tt> and <tt class="docutils literal"><span class="pre">testme6</span></tt>,
+while <tt class="docutils literal"><span class="pre">nosetests</span> <span class="pre">-a</span> <span class="pre">tags=b</span></tt> will run only <tt class="docutils literal"><span class="pre">testme5</span></tt>.</p>
+<p>Attribute tags also work on classes and methods as you might expect.  In
+<tt class="docutils literal"><span class="pre">attr/test_attr3.py</span></tt>, the following code</p>
+<pre class="literal-block">
+class TestMe:
+    x = True
+
+    def test_case1(self):
+        assert 1
+
+    def test_case2(self):
+        assert 1
+
+    test_case2.x = False
+</pre>
+<p>lets you run both <tt class="docutils literal"><span class="pre">test_case1</span></tt> (with <tt class="docutils literal"><span class="pre">-a</span> <span class="pre">x</span></tt>) and <tt class="docutils literal"><span class="pre">test_case2</span></tt>
+(with <tt class="docutils literal"><span class="pre">-a</span> <span class="pre">\!x</span></tt>); here, methods inherit the attributes of their
+parent class, but can override the class attributes with
+method-specific attributes.</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id16" id="running-nose-programmatically" name="running-nose-programmatically">Running nose programmatically</a></h1>
+<p>nose has a friendly top-level API which makes it accessible to Python
+programs.  You can run nose inside your own code by doing this:</p>
+<pre class="literal-block">
+import nose
+
+### configure paths, etc here
+
+nose.run()
+
+### do other stuff here
+</pre>
+<p>By default nose will pick up on <tt class="docutils literal"><span class="pre">sys.argv</span></tt>; if you want to pass in
+your own arguments, use <tt class="docutils literal"><span class="pre">nose.run(argv=args)</span></tt>.  You can also
+override the default test collector, test runner, test loader, and
+environment settings at this level.  This makes it convenient to add
+in certain types of new behavior; see <tt class="docutils literal"><span class="pre">multihome/multihome-nose</span></tt> for
+a script that lets you specify multiple &quot;test home directories&quot; by
+overriding the test collector.</p>
+<p>There are a few caveats to mention about using the top-level nose
+commands.  First, be sure to use <tt class="docutils literal"><span class="pre">nose.run</span></tt>, not <tt class="docutils literal"><span class="pre">nose.main</span></tt> --
+<tt class="docutils literal"><span class="pre">nose.main</span></tt> will exit after running the tests (although you can wrap
+it in a 'try/finally' if you insist).  Second, in the current version
+of nose (0.9b1), <tt class="docutils literal"><span class="pre">nose.run</span></tt> swipes <tt class="docutils literal"><span class="pre">sys.stdout</span></tt>, so <tt class="docutils literal"><span class="pre">print</span></tt> will
+not yield any output after <tt class="docutils literal"><span class="pre">nose.run</span></tt> completes.  (This should be
+fixed soon.)</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id17" id="writing-plug-ins-a-simple-guide" name="writing-plug-ins-a-simple-guide">Writing plug-ins -- a simple guide</a></h1>
+<p>As nice as nose already is, the plugin system is probably the best
+thing about it.  nose uses the setuptools API to load all registered
+nose plugins, allowing you to install 3rd party plugins quickly and
+easily; plugins can modify or override output handling, test
+discovery, and test execution.</p>
+<p>nose comes with a couple of plugins that demonstrate the power of the
+plugin API; I've discussed two (the attrib and doctest plugins) above.
+I've also written a few, as part of the <a class="reference" href="http://darcs.idyll.org/~t/projects/pinocchio/doc/index.html">pinocchio</a> nose extensions package.</p>
+<p>Here are a few tips and tricks for writing plugins.</p>
+<blockquote>
+<ul>
+<li><p class="first">read through the <tt class="docutils literal"><span class="pre">nose.plugins.IPluginInterface</span></tt> code a few times.</p>
+</li>
+<li><p class="first">for the <tt class="docutils literal"><span class="pre">want*</span></tt> functions (<tt class="docutils literal"><span class="pre">wantClass</span></tt>, <tt class="docutils literal"><span class="pre">wantMethod</span></tt>, etc.)
+you need to know:</p>
+<blockquote>
+<ul class="simple">
+<li>a return value of True indicates that your plugin wants this item.</li>
+<li>a return value of False indicates that your plugin doesn't want this item.</li>
+<li>a return value of None indicates that your plugin doesn't care about this item.</li>
+</ul>
+</blockquote>
+<p>Also note that plugins aren't guaranteed to be run in any particular order,
+so you have to order them yourself if you need this.  See the
+<tt class="docutils literal"><span class="pre">pinocchio.decorator</span></tt> module (part of <a class="reference" href="http://darcs.idyll.org/~t/projects/pinocchio/doc/index.html">pinocchio</a>) for an example.</p>
+</li>
+<li><p class="first">abuse stderr.  As much as I like the logging package, it can
+confuse matters by capturing output in ways I don't fully
+understand (or at least don't want to have to configure for
+debugging purposes).  While you're working on your plugin, put
+<tt class="docutils literal"><span class="pre">import</span> <span class="pre">sys;</span> <span class="pre">err</span> <span class="pre">=</span> <span class="pre">sys.stderr</span></tt> at the top of your plugin module,
+and then use <tt class="docutils literal"><span class="pre">err.write</span></tt> to produce debugging output.</p>
+</li>
+<li><p class="first">notwithstanding the stderr advice, <tt class="docutils literal"><span class="pre">-vv</span></tt> is your friend -- it will tell
+you that your test file isn't even being examined for tests, and it will
+also tell you what order things are being run in.</p>
+</li>
+<li><p class="first">write your initial plugin code by simply copying <tt class="docutils literal"><span class="pre">nose.plugins.attrib</span></tt>
+and deleting everything that's not generic.  This greatly simplifies
+getting your plugin loaded &amp; functioning.</p>
+</li>
+<li><p class="first">to register your plugin, you need this code in e.g. a file called 'setup.py'</p>
+<pre class="literal-block">
+from setuptools import setup
+
+setup(
+    name='my_nose_plugin',
+    packages = ['my_nose_plugin'],
+    entry_points = {
+        'nose.plugins': [
+            'pluginA = my_nose_plugin:pluginA',
+            ]
+        },
+)
+</pre>
+<p>You can then install (and register) the plugin with <tt class="docutils literal"><span class="pre">easy_install</span> <span class="pre">.</span></tt>,
+run in the directory containing 'setup.py'.</p>
+</li>
+</ul>
+</blockquote>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id18" id="nose-caveats-let-the-buyer-beware-occasionally" name="nose-caveats-let-the-buyer-beware-occasionally">nose caveats -- let the buyer beware, occasionally</a></h1>
+<p>I've been using nose fairly seriously for a while now, on multiple
+projects.  The two most frustrating problems I've had are with the
+output capture (mentioned above, in <cite>Running nose programmatically</cite>)
+and a situation involving the <tt class="docutils literal"><span class="pre">logging</span></tt> module.  The output capture
+problem is easily taken care of, once you're aware of it -- just be
+sure to save sys.stdout before running any nose code.  The logging
+module problem cropped up when converting an existing unit test suite
+over to nose: the code tested an application that used the <tt class="docutils literal"><span class="pre">logging</span></tt>
+module, and reconfigured logging so that nose's output didn't show up.
+This frustrated my attempts to trace test discovery to no end -- as
+far as I could tell, nose was simply stopping test discovery at a
+certain point!  I doubt there's a general solution to this, but I
+thought I'd mention it.</p>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id19" id="credits-legalese" name="credits-legalese">Credits &amp; Legalese</a></h1>
+<p>Jason Pellerin, besides for being the author of nose, has been very
+helpful in answering questions!  Terry Peppers and Chad Whitacre
+kindly sent me errata.</p>
+<p>This introduction is Copyright (C) 2006, C. Titus Brown,
+<a class="reference" href="mailto:titus&#64;idyll.org">titus&#64;idyll.org</a>.  Please don't redistribute or publish it without his
+express permission.</p>
+<p>Comments, corrections, and additions are welcome, of course!</p>
+</div>
+</div>
+</body>
+</html>

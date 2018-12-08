@@ -1,0 +1,1021 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Structuring, Testing, and Maintaining Python Programs</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="structuring-testing-and-maintaining-python-programs">
+<h1 class="title">Structuring, Testing, and Maintaining Python Programs</h1>
+<p>Python is really the first programming language in which I started
+re-using code significantly.  In part, this is because it is rather
+easy to compartmentalize functions and classes in Python.  Something
+else that Python makes relatively easy is building testing into your
+program structure.  Combined, reusability and testing can have a huge
+effect on maintenance.</p>
+<div class="section">
+<h1><a id="programming-for-reusability" name="programming-for-reusability">Programming for reusability</a></h1>
+<p>It's difficult to come up with any hard and fast rules for programming
+for reusability, but my main rules of thumb are: don't plan too much,
+and don't hesitate to refactor your code. <a class="footnote-reference" href="#refactor" id="id1" name="id1">[1]</a>.</p>
+<p>In any project, you will write code that
+you want to re-use in a slightly different context.  It will often be
+easiest to cut and paste this code rather than to copy the module it's
+in -- but try to resist this temptation a bit, and see if you can make
+the code work for both uses, and then use it in both places.</p>
+<table class="docutils footnote" frame="void" id="refactor" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1" name="refactor">[1]</a></td><td>If you haven't read Martin Fowler's <strong>Refactoring</strong>, do
+so -- it describes how to incrementally make your code better.
+I'll discuss it some more in the context of testing, below.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h1><a id="modules-and-scripts" name="modules-and-scripts">Modules and scripts</a></h1>
+<p>The organization of your code source files can help or hurt you with
+code re-use.</p>
+<p>Most people start their Python programming out by putting everything in
+a script:</p>
+<pre class="literal-block">
+calc-squares.py:
+  #! /usr/bin/env python
+  for i in range(0, 10):
+     print i**2
+</pre>
+<p>This is great for experimenting, but you can't re-use this code at all!</p>
+<p>(UNIX folk: note the use of <tt class="docutils literal"><span class="pre">#!</span> <span class="pre">/usr/bin/env</span> <span class="pre">python</span></tt>, which tells UNIX
+to execute this script using whatever <tt class="docutils literal"><span class="pre">python</span></tt> program is first in your
+path.  This is more portable than putting <tt class="docutils literal"><span class="pre">#!</span> <span class="pre">/usr/local/bin/python</span></tt> or
+<tt class="docutils literal"><span class="pre">#!</span> <span class="pre">/usr/bin/python</span></tt> in your code, because not everyone puts python in
+the same place.)</p>
+<p>Back to reuse.  What about this?</p>
+<pre class="literal-block">
+calc-squares.py:
+  #! /usr/bin/env python
+  def squares(start, stop):
+     for i in range(start, stop):
+        print i**2
+
+  squares(0, 10)
+</pre>
+<p>I think that's a bit better for re-use -- you've made <tt class="docutils literal"><span class="pre">squares</span></tt>
+flexible and re-usable -- but there are two mechanistic problems.
+First, it's named <tt class="docutils literal"><span class="pre">calc-squares.py</span></tt>, which means it can't readily be
+imported.  (Import filenames have to be valid Python names, of
+course!)  And, second, were it importable, it would execute <tt class="docutils literal"><span class="pre">squares(0,</span> <span class="pre">10)</span></tt>
+on import - hardly what you want!</p>
+<p>To fix the first, just change the name:</p>
+<pre class="literal-block">
+calc_squares.py:
+  #! /usr/bin/env python
+  def squares(start, stop):
+    for i in range(start, stop):
+        print i**2
+
+  squares(0, 10)
+</pre>
+<p>Good, but now if you do <tt class="docutils literal"><span class="pre">import</span> <span class="pre">calc_squares</span></tt>, the <tt class="docutils literal"><span class="pre">squares(0,</span> <span class="pre">10)</span></tt> code
+will still get run!  There are a couple of ways to deal with this.  The first
+is to look at the module name: if it's <tt class="docutils literal"><span class="pre">calc_squares</span></tt>, then the module is
+being imported, while if it's <tt class="docutils literal"><span class="pre">__main__</span></tt>, then the module is being run as
+a script:</p>
+<pre class="literal-block">
+calc_squares.py:
+  #! /usr/bin/env python
+  def squares(start, stop):
+    for i in range(start, stop):
+       print i**2
+
+  if __name__ == '__main__':
+    squares(0, 10)
+</pre>
+<p>Now, if you run <tt class="docutils literal"><span class="pre">calc_squares.py</span></tt> directly, it will run <tt class="docutils literal"><span class="pre">squares(0,</span> <span class="pre">10)</span></tt>;
+if you import it, it will simply define the <tt class="docutils literal"><span class="pre">squares</span></tt> function and leave
+it at that.  This is probably the most standard way of doing it.</p>
+<p>I actually prefer a different technique, because of my fondness for testing.
+(I also think this technique lends itself to reusability, though.)  I
+would actually write two files:</p>
+<pre class="literal-block">
+squares.py:
+  def squares(start, stop):
+    for i in range(start, stop):
+       print i**2
+
+  if __name__ == `__main__`:
+    # ...run automated tests...
+
+calc-squares:
+  #! /usr/bin/env python
+  import squares
+  squares.squares(0, 10)
+</pre>
+<p>A few notes -- first, this is eminently reusable code, because
+<tt class="docutils literal"><span class="pre">squares.py</span></tt> is completely separate from the context-specific call.
+Second, you can look at the directory listing in an instant and see
+that <tt class="docutils literal"><span class="pre">squares.py</span></tt> is probably a library, while <tt class="docutils literal"><span class="pre">calc-squares</span></tt> must
+be a script, because the latter cannot be imported.  Third, you can add
+automated tests to <tt class="docutils literal"><span class="pre">squares.py</span></tt> (as described below), and run them
+simply by running <tt class="docutils literal"><span class="pre">python</span> <span class="pre">squares.py</span></tt>.  Fourth, you can add script-specific
+code such as command-line argument handling to the script, and keep it
+separate from your data handling and algorithm code.</p>
+</div>
+<div class="section">
+<h1><a id="packages" name="packages">Packages</a></h1>
+<p>A Python package is a directory full of Python modules containing a
+special file, <tt class="docutils literal"><span class="pre">__init__.py</span></tt>, that tells Python that the directory is
+a package.  Packages are for collections of library code that are too
+big to fit into single files, or that have some logical substructure
+(e.g. a central library along with various utility functions that all
+interact with the central library).</p>
+<p>For an example, look at this directory tree:</p>
+<pre class="literal-block">
+package/
+  __init__.py        -- contains functions a(), b()
+  other.py           -- contains function c()
+  subdir/
+     __init__.py     -- contains function d()
+</pre>
+<p>From this directory tree, you would be able to access the functions like
+so:</p>
+<pre class="literal-block">
+import package
+package.a()
+package.b()
+
+import package.other
+package.other.c()
+
+import package.subdir
+package.subdir.d()
+</pre>
+<p>Note that <tt class="docutils literal"><span class="pre">__init__.py</span></tt> is just another Python file; there's nothing
+special about it except for the name, which tells Python that the
+directory is a package directory.  <tt class="docutils literal"><span class="pre">__init__.py</span></tt> is the only code
+executed on import, so if you want names and symbols from other
+modules to be accessible at the package top level, you have to import
+or create them in <tt class="docutils literal"><span class="pre">__init__.py</span></tt>.</p>
+<p>There are two ways to use packages: you can treat them as a convenient
+code organization technique, and make most of the functions or classes
+available at the top level; or you can use them as a library
+hierarchy.  In the first case you would make all of the names above
+available at the top level:</p>
+<pre class="literal-block">
+package/__init__.py:
+  from other import c
+  from subdir import d
+  ...
+</pre>
+<p>which would let you do this:</p>
+<pre class="literal-block">
+import package
+package.a()
+package.b()
+package.c()
+package.d()
+</pre>
+<p>That is, the names of the functions would all be immediately available at
+the top level of the package, but the implementations would be spread out
+among the different files and directories.  I personally prefer this because
+I don't have to remember as much ;).  The down side is that everything gets
+imported all at once, which (especially for large bodies of code) may be
+slow and memory intensive if you only need a few of the functions.</p>
+<p>Alternatively, if you wanted to keep the library hierarchy, just leave out
+the top-level imports.  The advantage here is that you only import the
+names you need; however, you need to remember more.</p>
+<p>Some people are fond of package trees, but I've found that hierarchies
+of packages more than two deep are annoying to develop on: you spend a
+lot of your time browsing around between directories, trying to figure
+out <em>exactly</em> which function you need to use and what it's named.
+(Your mileage may vary.)  I think this is one of the main reasons why
+the Python stdlib looks so big, because most of the packages are
+top-level.</p>
+<p>One final note: you can restrict what objects are exported from a module
+or package by listing the names in the <tt class="docutils literal"><span class="pre">__all__</span></tt> variable.  So, if
+you had a module <tt class="docutils literal"><span class="pre">some_mod.py</span></tt> that contained this code:</p>
+<pre class="literal-block">
+some_mod.py:
+  __all__ = ['fn1']
+
+  def fn1(...):
+      ...
+
+  def fn2(...):
+      ...
+</pre>
+<p>then only 'some_mod.fn1()' would be available on import.  This is a
+good way to cut down on &quot;namespace pollution&quot; -- the presence of
+&quot;private&quot; objects and code in imported modules -- which in turn makes
+introspection useful.</p>
+</div>
+<div class="section">
+<h1><a id="a-short-digression-naming-and-formatting" name="a-short-digression-naming-and-formatting">A short digression: naming and formatting</a></h1>
+<p>You may have noticed that a lot of Python code looks pretty similar --
+this is because there's an &quot;official&quot; style guide for Python, called
+<a class="reference" href="http://www.python.org/dev/peps/pep-0008/">PEP 8</a>.  It's worth a quick
+skim, and an occasional deeper read for some sections.</p>
+<p>Here are a few tips that will make your code look internally
+consistent, if you don't already have a coding style of your own:</p>
+<blockquote>
+<ul>
+<li><p class="first">use four spaces (NOT a tab) for each indentation level;</p>
+</li>
+<li><dl class="first docutils">
+<dt>use lowercase, _-separated names for module and function names, e.g.</dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">my_module</span></tt>;</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">use CapsWord style to name classes, e.g. <tt class="docutils literal"><span class="pre">MySpecialClass</span></tt>;</p>
+</li>
+<li><dl class="first docutils">
+<dt>use '_'-prefixed names to indicate a &quot;private&quot; variable that should</dt>
+<dd><p class="first last">not be used outside this module, , e.g. <tt class="docutils literal"><span class="pre">_some_private_variable</span></tt>;</p>
+</dd>
+</dl>
+</li>
+</ul>
+</blockquote>
+</div>
+<div class="section">
+<h1><a id="another-short-digression-docstrings" name="another-short-digression-docstrings">Another short digression: docstrings</a></h1>
+<p>Docstrings are strings of text attached to Python objects like
+modules, classes, and methods/functions.  They can be used to provide
+human-readable help when building a library of code.  &quot;Good&quot; docstring
+coding is used to provide additional information about functionality
+beyond what can be discovered automatically by introspection; compare</p>
+<pre class="literal-block">
+def is_prime(x):
+    &quot;&quot;&quot;
+    is_prime(x) -&gt; true/false.  Determines whether or not x is prime,
+    and return true or false.
+    &quot;&quot;&quot;
+</pre>
+<p>versus</p>
+<pre class="literal-block">
+def is_prime(x):
+    &quot;&quot;&quot;
+    Returns true if x is prime, false otherwise.
+
+    is_prime() uses the Bernoulli-Schmidt formalism for figuring out
+    if x is prime.  Because the BS form is stochastic and hysteretic,
+    multiple calls to this function will be increasingly accurate.
+    &quot;&quot;&quot;
+</pre>
+<p>The top example is good (documentation is good!), but the bottom
+example is better, for a few reasons.  First, it is not redundant:
+the arguments to <tt class="docutils literal"><span class="pre">is_prime</span></tt> are discoverable by introspection and
+don't need to be specified.  Second, it's summarizable: the first line
+stands on its own, and people who are interested in more detail can read
+on.  This enables certain document extraction tools to do a better job.</p>
+<p>For more on docstrings, see <a class="reference" href="http://www.python.org/dev/peps/pep-0257/">PEP 257</a>.</p>
+</div>
+<div class="section">
+<h1><a id="sharing-data-between-code" name="sharing-data-between-code">Sharing data between code</a></h1>
+<p>There are three levels at which data can be shared between Python
+code: module globals, class attributes, and object attributes.  You
+can also sneak data into functions by dynamically defining a function
+within another scope, and/or binding them to keyword arguments.</p>
+</div>
+<div class="section">
+<h1><a id="scoping-a-digression" name="scoping-a-digression">Scoping: a digression</a></h1>
+<p>Just to make sure we're clear on scoping, here are a few simple
+examples.  In this first example, f() gets x from the module
+namespace.</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; x = 1
+&gt;&gt;&gt; def f():
+...   print x
+&gt;&gt;&gt; f()
+1
+</pre>
+<p>In this second example, f() overrides x, but only within the namespace
+in f().</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; x = 1
+&gt;&gt;&gt; def f():
+...   x = 2
+...   print x
+&gt;&gt;&gt; f()
+2
+&gt;&gt;&gt; print x
+1
+</pre>
+<p>In this third example, g() overrides x, and h() obtains x from within g(),
+because h() was <em>defined</em> within g():</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; x = 1
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; def outer():
+...    x = 2
+...
+...    def inner():
+...       print x
+...
+...    return inner
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; inner = outer()
+&gt;&gt;&gt; inner()
+2
+</pre>
+<p>In all cases, without a <tt class="docutils literal"><span class="pre">global</span></tt> declaration, assignments will
+simply create a new local variable of that name, and not modify the
+value in any other scope:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; x = 1
+&gt;&gt;&gt; def outer():
+...    x = 2
+...
+...    def inner():
+...       x = 3
+...
+...    inner()
+...
+...    print x
+&gt;&gt;&gt; outer()
+2
+</pre>
+<p>However, <em>with</em> a <tt class="docutils literal"><span class="pre">global</span></tt> definition, the outermost scope is used:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; x = 1
+&gt;&gt;&gt; def outer():
+...    x = 2
+...
+...    def inner():
+...       global x
+...       x = 3
+...
+...    inner()
+...
+...    print x
+&gt;&gt;&gt; outer()
+2
+&gt;&gt;&gt; print x
+3
+</pre>
+<p>I generally suggest avoiding scope trickery as much as possible, in
+the interests of readability.  There are two common patterns that I
+use when I <em>have</em> to deal with scope issues.</p>
+<p>First, module globals are sometimes necessary.  For one such case,
+imagine that you have a centralized resource that you must initialize
+precisely once, and you have a number of functions that depend on that
+resource.  Then you can use a module global to keep track of the
+initialization state.  Here's a (contrived!) example for a random
+number generator that initializes the random number seed precisely
+once:</p>
+<pre class="literal-block">
+_initialized = False
+def init():
+  global _initialized
+  if not _initialized:
+      import time
+      random.seed(time.time())
+      _initialized = True
+
+def randint(start, stop):
+  init()
+  ...
+</pre>
+<p>This code ensures that the random number seed is initialized only once by
+making use of the <tt class="docutils literal"><span class="pre">_initialized</span></tt> module global.  A few points, however:</p>
+<blockquote>
+<ul class="simple">
+<li>this code is not threadsafe.  If it was really important that the
+resource be initialized precisely once, you'd need to use thread locking.
+Otherwise two functions could call <tt class="docutils literal"><span class="pre">randint()</span></tt> at the same time and
+both could get past the <tt class="docutils literal"><span class="pre">if</span></tt> statement.</li>
+<li>the module global code is very isolated and its use is very clear.
+Generally I recommend having only one or two functions that access the
+module global, so that if I need to change its use I don't have to
+understand a lot of code.</li>
+</ul>
+</blockquote>
+<p>The other &quot;scope trickery&quot; that I sometimes engage in is passing data into
+dynamically generated functions.  Consider a situation where you have to
+use a callback API: that is, someone has given you a library function that
+will call your own code in certain situations. For our example, let's look at
+the <tt class="docutils literal"><span class="pre">re.sub</span></tt> function that comes with Python, which takes a callback
+function to apply to each match.</p>
+<p>Here's a callback function that uppercases words:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def replace(m):
+...   match = m.group()
+...   print 'replace is processing:', match
+...   return match.upper()
+&gt;&gt;&gt; s = &quot;some string&quot;
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; import re
+&gt;&gt;&gt; print re.sub('\\S+', replace, s)
+replace is processing: some
+replace is processing: string
+SOME STRING
+</pre>
+<p>What's happening here is that the <tt class="docutils literal"><span class="pre">replace</span></tt> function is called each
+time the regular expression '\S+' (a set of non-whitespace characters)
+is matched.  The matching substring is replaced by whatever the
+function returns.</p>
+<p>Now let's imagine a situation where we want to pass information into
+<tt class="docutils literal"><span class="pre">replace</span></tt>; for example, we want to process only words that match
+in a dictionary.  (I <em>told</em> you it was contrived!)  We could simply rely
+on scoping:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; d = { 'some' : True, 'string' : False }
+&gt;&gt;&gt; def replace(m):
+...   match = m.group()
+...   if match in d and d[match]:
+...      return match.upper()
+...   return match
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; print re.sub('\\S+', replace, s)
+SOME string
+</pre>
+<p>but I would argue against it on the grounds of readability: passing
+information implicitly between scopes is bad.  (At this point advanced
+Pythoneers might sneer at me, because scoping is natural to Python,
+but nuts to them: readability and transparency is also very
+important.)  You <em>could</em> also do it this way:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; d = { 'some' : True, 'string' : False }
+&gt;&gt;&gt; def replace(m, replace_dict=d):             # &lt;-- explicit declaration
+...   match = m.group()
+...   if match in replace_dict and replace_dict[match]:
+...      return match.upper()
+...   return match
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; print re.sub('\\S+', replace, s)
+SOME string
+</pre>
+<p>The idea is to use keyword arguments on the function to pass in required
+information, thus making the information passing explicit.</p>
+</div>
+<div class="section">
+<h1><a id="back-to-sharing-data" name="back-to-sharing-data">Back to sharing data</a></h1>
+<p>I started discussing scope in the context of sharing data, but we got
+a bit sidetracked from data sharing.  Let's get back to that now.</p>
+<p>The key to thinking about data sharing in the context of code reuse
+is to think about how that data will be used.</p>
+<p>If you use a module global, then any code in that module has access to
+that global.</p>
+<p>If you use a class attribute, then any object of that class type
+(including inherited classes) shares that data.</p>
+<p>And, if you use an object attribute, then every object of that class
+type will have its own version of that data.</p>
+<p>How do you choose which one to use?  My ground rule is to minimize the
+use of more widely shared data.  If it's possible to use an object
+variable, do so; otherwise, use either a module or class attribute.
+(In practice I almost never use class attributes, and infrequently use
+module globals.)</p>
+<!-- CTB consider examples: singleton; caching experience; ...? -->
+</div>
+<div class="section">
+<h1><a id="how-modules-are-loaded-and-when-code-is-executed" name="how-modules-are-loaded-and-when-code-is-executed">How modules are loaded (and when code is executed)</a></h1>
+<p>Something that has been implicit in the discussion of scope and data
+sharing, above, is the order in which module code is executed.  There
+shouldn't be any surprises here if you've been using Python for a
+while, so I'll be brief: in general, the code at the top level of a
+module is executed at <em>first</em> import, and all other code is executed
+in the order you specify when you start calling functions or methods.</p>
+<p>Note that because the top level of a module is executed precisely
+once, at <em>first</em> import, the following code prints &quot;hello, world&quot; only
+once:</p>
+<pre class="literal-block">
+mod_a.py:
+  def f():
+     print 'hello, world'
+
+  f()
+
+mod_b.py:
+  import mod_a
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">reload</span></tt> function will reload the module and force re-execution at
+the top level:</p>
+<pre class="literal-block">
+reload(sys.modules['mod_a'])
+</pre>
+<p>It is also worth noting that the module name is bound to the local
+namespace <em>prior</em> to the execution of the code in the module, so not
+all symbols in the module are immediately available.  This really only
+impacts you if you have interdependencies between modules: for
+example, this will work if <tt class="docutils literal"><span class="pre">mod_a</span></tt> is imported before <tt class="docutils literal"><span class="pre">mod_b</span></tt>:</p>
+<pre class="literal-block">
+mod_a.py:
+  import mod_b
+
+mod_b.py:
+  import mod_a
+</pre>
+<p>while this will not:</p>
+<pre class="literal-block">
+mod_a.py:
+  import mod_b
+  x = 5
+
+mod_b.py:
+  import mod_a
+  y = mod_a.x
+</pre>
+<p>To see why, let's put in some print statements:</p>
+<pre class="literal-block">
+mod_a.py:
+  print 'at top of mod_a'
+  import mod_b
+  print 'mod_a: defining x'
+  x = 5
+
+mod_b.py:
+  print 'at top of mod_b'
+  import mod_a
+  print 'mod_b: defining y'
+  y = mod_a.x
+</pre>
+<p>Now try <tt class="docutils literal"><span class="pre">import</span> <span class="pre">mod_a</span></tt> and <tt class="docutils literal"><span class="pre">import</span> <span class="pre">mod_b</span></tt>, each time in a new
+interpreter:</p>
+<pre class="literal-block">
+&gt;&gt; import mod_a
+at top of mod_a
+at top of mod_b
+mod_b: defining y
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;mod_a.py&quot;, line 2, in &lt;module&gt;
+    import mod_b
+  File &quot;mod_b.py&quot;, line 4, in &lt;module&gt;
+    y = mod_a.x
+AttributeError: 'module' object has no attribute 'x'
+
+&gt;&gt; import mod_b
+at top of mod_b
+at top of mod_a
+mod_a: defining x
+mod_b: defining y
+</pre>
+</div>
+<div class="section">
+<h1><a id="pythonpath-and-finding-packages-modules-during-development" name="pythonpath-and-finding-packages-modules-during-development">PYTHONPATH, and finding packages &amp; modules during development</a></h1>
+<p>So, you've got your re-usable code nicely defined in modules, and now you
+want to ... use it.  How can you import code from multiple locations?</p>
+<p>The simplest way is to set the PYTHONPATH environment variable to
+contain a list of directories from which you want to import code;
+e.g. in UNIX bash,</p>
+<pre class="literal-block">
+% export PYTHONPATH=/path/to/directory/one:/path/to/directory/two
+</pre>
+<p>or in csh,</p>
+<pre class="literal-block">
+% setenv PYTHONPATH /path/to/directory/one:/path/to/directory/two
+</pre>
+<p>Under Windows,</p>
+<pre class="literal-block">
+&gt; set PYTHONPATH directory1;directory2
+</pre>
+<p>should work.</p>
+<!-- @CTB test -->
+<p>However, setting the PYTHONPATH explicitly can make your code less
+movable in practice, because you will forget (and fail to document)
+the modules and packages that your code depends on.  I prefer to modify
+sys.path directly:</p>
+<pre class="literal-block">
+import sys
+sys.path.insert(0, '/path/to/directory/one')
+sys.path.insert(0, '/path/to/directory/two')
+</pre>
+<p>which has the advantage that you are explicitly specifying the location
+of packages that you depend upon in the dependent code.</p>
+<p>Note also that you can put modules and packages in zip files and
+Python will be able to import directly from the zip file; just place
+the path to the zip file in either <tt class="docutils literal"><span class="pre">sys.path</span></tt> or your PYTHONPATH.</p>
+<p>Now, I tend to organize my projects into several directories, with a
+<tt class="docutils literal"><span class="pre">bin/</span></tt> directory that contains my scripts, and a <tt class="docutils literal"><span class="pre">lib/</span></tt> directory
+that contains modules and packages.  If I want to to deploy this code
+in multiple locations, I can't rely on inserting absolute paths into
+sys.path; instead, I want to use relative paths.  Here's the trick I use</p>
+<p>In my script directory, I write a file <tt class="docutils literal"><span class="pre">_mypath.py</span></tt>.</p>
+<pre class="literal-block">
+_mypath.py:
+   import os, sys
+   thisdir = os.path.dirname(__file__)
+   libdir = os.path.join(thisdir, '../relative/path/to/lib/from/bin')
+
+   if libdir not in sys.path:
+      sys.path.insert(0, libdir)
+</pre>
+<p>Now, in each script I put <tt class="docutils literal"><span class="pre">import</span> <span class="pre">_mypath</span></tt> at the top of the script.
+When running scripts, Python automatically enters the script's
+directory into sys.path, so the script can import _mypath.  Then
+_mypath uses the special attribute __file__ to calculate its own
+location, from which it can calculate the absolute path to the library
+directory and insert the library directory into <tt class="docutils literal"><span class="pre">sys.path</span></tt>.</p>
+</div>
+<div class="section">
+<h1><a id="setup-py-and-distutils-the-old-fashioned-way-of-installing-python-packages" name="setup-py-and-distutils-the-old-fashioned-way-of-installing-python-packages">setup.py and distutils: the old fashioned way of installing Python packages</a></h1>
+<p>While developing code, it's easy to simply work out of the development
+directory.  However, if you want to pass the code onto others as a
+finished module, or provide it to systems admins, you might want to
+consider writing a <tt class="docutils literal"><span class="pre">setup.py</span></tt> file that can be used to install your
+code in a more standard way.  setup.py lets you use <a class="reference" href="http://docs.python.org/dist/dist.html">distutils</a> to install the software by
+running</p>
+<pre class="literal-block">
+python setup.py install
+</pre>
+<p>Writing a setup.py is simple, especially if your package is pure Python
+and doesn't include any extension files.  A setup.py file for a pure Python
+install looks like this:</p>
+<pre class="literal-block">
+from distutils.core import setup
+setup(name='your_package_name',
+      py_modules = ['module1', 'module2']
+      packages = ['package1', 'package2']
+      scripts = ['script1', 'script2'])
+</pre>
+<p>One this script is written, just drop it into the top-level directory
+and type <tt class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">build</span></tt>.  This will make sure that distutils
+can find all the files.</p>
+<p>Once your setup.py works for building, you can package up the entire
+directory with tar or zip and anyone should be able to install it by
+unpacking the package and typing</p>
+<pre class="literal-block">
+% python setup.py install
+</pre>
+<p>This will copy the packages and modules into Python's
+<tt class="docutils literal"><span class="pre">site-packages</span></tt> directory, and install the scripts into Python's
+script directory.</p>
+</div>
+<div class="section">
+<h1><a id="setup-py-eggs-and-easy-install-the-new-fangled-way-of-installing-python-packages" name="setup-py-eggs-and-easy-install-the-new-fangled-way-of-installing-python-packages">setup.py, eggs, and easy_install: the new fangled way of installing Python packages</a></h1>
+<p>A somewhat newer (and better) way of distributing Python software is
+to use easy_install, a system developed by Phillip Eby as part of the
+setuptools package.  Many of the capabilities of
+easy_install/setuptools are probably unnecessary for scientific Python
+developers (although it's an excellent way to install Python packages
+from other sources), so I will focus on three capabilities that I
+think are most useful for &quot;in-house&quot; development: versioning, user
+installs, and binary eggs.</p>
+<p>First, install easy_install/setuptools.  You can do this by downloading</p>
+<pre class="literal-block">
+http://peak.telecommunity.com/dist/ez_setup.py
+</pre>
+<p>and running <tt class="docutils literal"><span class="pre">python</span> <span class="pre">ez_setup.py</span></tt>.  (If you can't do this as the
+superuser, see the note below about user installs.)  Once you've
+installed setuptools, you should be able to run the script
+<tt class="docutils literal"><span class="pre">easy_install</span></tt>.</p>
+<p>The first thing this lets you do is easily install any software that
+is distutils-compatible.  You can do this from a number of sources:
+from an unpackaged directory (as with <tt class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></tt>);
+from a tar or zip file; from the project's URL or Web page; from an
+egg (see below); or from PyPI, the Python Package Index (see
+<a class="reference" href="http://cheeseshop.python.org/pypi/">http://cheeseshop.python.org/pypi/</a>).</p>
+<p>Let's try installing <tt class="docutils literal"><span class="pre">nose</span></tt>, a unit test discovery package we'll be
+looking at in the testing section (below).  Type:</p>
+<pre class="literal-block">
+easy_install --install-dir=~/.packages nose
+</pre>
+<p>This will go to the Python Package Index, find the URL for nose,
+download it, and install it in your ~/.packages directory.  We're
+specifying an install-dir so that you can install it for your use
+only; if you were the superuser, you could install it for everyone by
+omitting '--install-dir'.</p>
+<p>(Note that you need to add ~/.packages to your PATH and your
+PYTHONPATH, something I've already done for you.)</p>
+<p>So, now, you can go do 'import nose' and it will work.  Neat, eh?
+Moreover, the nose-related scripts (<tt class="docutils literal"><span class="pre">nosetests</span></tt>, in this case) have
+been installed for your use as well.</p>
+<p>You can also install specific versions of software; right now, the
+latest version of nose is 0.9.3, but if you wanted 0.9.2, you could
+specify <tt class="docutils literal"><span class="pre">easy_install</span> <span class="pre">nose==0.9.2</span></tt> and it would do its best to find
+it.</p>
+<p>This leads to the next setuptools feature of note,
+<tt class="docutils literal"><span class="pre">pkg_resource.require</span></tt>.  <tt class="docutils literal"><span class="pre">pkg_resources.require</span></tt> lets you specify
+that certain packages must be installed.  Let's try it out by
+requiring that CherryPy 3.0 or later is installed:</p>
+<pre class="literal-block">
+&gt;&gt; import pkg_resources
+&gt;&gt; pkg_resources.require('CherryPy &gt;= 3.0')
+Traceback (most recent call last):
+     ...
+DistributionNotFound: CherryPy &gt;= 3.0
+</pre>
+<p>OK, so that failed... but now let's install CherryPy:</p>
+<pre class="literal-block">
+% easy_install --install-dir=~/.packages CherryPy
+</pre>
+<p>Now the require will work:</p>
+<pre class="literal-block">
+&gt;&gt; pkg_resources.require('CherryPy &gt;= 3.0')
+&gt;&gt; import CherryPy
+</pre>
+<p>This version requirement capability is quite powerful, because it lets
+you specify exactly the versions of the software you need for your own
+code to work.  And, if you need multiple versions of something
+installed, setuptools lets you do that, too -- see the
+<tt class="docutils literal"><span class="pre">--multi-version</span></tt> flag for more information.  While you still can't
+use <em>different</em> versions of the same package in the same program, at
+least you can have multiple versions of the same package installed!</p>
+<p>Throughout this, we've been using another great feature of setuptools:
+user installs.  By specifying the <tt class="docutils literal"><span class="pre">--install-dir</span></tt>, you can install
+most Python packages for yourself, which lets you take advantage of
+easy_install's capabilities without being the superuser on your
+development machine.</p>
+<p>This brings us to the last feature of setuptools that I want to
+mention: eggs, and in particular binary eggs.  We'll explore binary
+eggs later; for now let me just say that easy_install makes it
+possible for you to package up multiple binary versions of your
+software (<em>with</em> extension modules) so that people don't have to
+compile it themselves.  This is an invaluable and somewhat
+underutilized feature of easy_install, but it can make life much
+easier for your users.</p>
+</div>
+</div>
+</body>
+</html>

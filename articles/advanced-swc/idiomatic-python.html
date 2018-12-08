@@ -1,0 +1,974 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Idiomatic Python</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="idiomatic-python">
+<h1 class="title">Idiomatic Python</h1>
+<p>Extracts from <a class="reference" href="http://www.python.org/doc/Humor.html#zen">The Zen of Python</a> by Tim Peters:</p>
+<blockquote>
+<ul class="simple">
+<li>Beautiful is better than ugly.</li>
+<li>Explicit is better than implicit.</li>
+<li>Simple is better than complex.</li>
+<li>Readability counts.</li>
+</ul>
+</blockquote>
+<p>(The whole Zen is worth reading...)</p>
+<p>The first step in programming is getting stuff to work at all.</p>
+<p>The next step in programming is getting stuff to work regularly.</p>
+<p>The step after that is reusing code and designing for reuse.</p>
+<p>Somewhere in there you will start writing idiomatic Python.</p>
+<p>Idiomatic Python is what you write when the <em>only</em> thing you're
+struggling with is the right way to solve <em>your</em> problem, and you're
+not struggling with the programming language or some weird library
+error or a nasty data retrieval issue or something else extraneous to
+your real problem. The idioms you prefer may differ from the idioms I
+prefer, but with Python there will be a fair amount of overlap,
+because there is usually at most one obvious way to do every task.  (A
+caveat: &quot;obvious&quot; is unfortunately the eye of the beholder, to some
+extent.)</p>
+<p>For example, let's consider the right way to keep track of the item number
+while iterating over a list.  So, given a list z,</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; z = [ 'a', 'b', 'c', 'd' ]
+</pre>
+<p>let's try printing out each item along with its index.</p>
+<p>You could use a while loop:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; i = 0
+&gt;&gt;&gt; while i &lt; len(z):
+...    print i, z[i]
+...    i += 1
+0 a
+1 b
+2 c
+3 d
+</pre>
+<p>or a for loop:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; for i in range(0, len(z)):
+...    print i, z[i]
+0 a
+1 b
+2 c
+3 d
+</pre>
+<p>but I think the clearest option is to use <tt class="docutils literal"><span class="pre">enumerate</span></tt>:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; for i, item in enumerate(z):
+...    print i, item
+0 a
+1 b
+2 c
+3 d
+</pre>
+<p>Why is this the clearest option?  Well, look at the ZenOfPython extract
+above: it's explicit (we used <tt class="docutils literal"><span class="pre">enumerate</span></tt>); it's simple; it's readable;
+and I would even argue that it's prettier than the while loop, if not
+exactly &quot;beatiful&quot;.</p>
+<p>Python provides this kind of simplicity in as many places as possible, too.
+Consider file handles; did you know that they were iterable?</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; for line in file('data/listfile.txt'):
+...    print line.rstrip()
+a
+b
+c
+d
+</pre>
+<p>Where Python really shines is that this kind of simple idiom -- in
+this case, iterables -- is very very easy not only to use but to
+<em>construct</em> in your own code.  This will make your own code much more
+reusable, while improving code readability dramatically.  And that's
+the sort of benefit you will get from writing idiomatic Python.</p>
+<div class="section">
+<h1><a id="some-basic-data-types" name="some-basic-data-types">Some basic data types</a></h1>
+<p>I'm sure you're all familiar with tuples, lists, and dictionaries, right?
+Let's do a quick tour nonetheless.</p>
+<p>'tuples' are all over the place.  For example, this code for swapping two
+numbers implicitly uses tuples:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; a = 5
+&gt;&gt;&gt; b = 6
+&gt;&gt;&gt; a, b = b, a
+&gt;&gt;&gt; print a == 6, b == 5
+True True
+</pre>
+<p>That's about all I have to say about tuples.</p>
+<p>I use lists and dictionaries <em>all the time</em>.  They're the two greatest
+inventions of mankind, at least as far as Python goes.  With lists,
+it's just easy to keep track of stuff:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; x = []
+&gt;&gt;&gt; x.append(5)
+&gt;&gt;&gt; x.extend([6, 7, 8])
+&gt;&gt;&gt; x
+[5, 6, 7, 8]
+&gt;&gt;&gt; x.reverse()
+&gt;&gt;&gt; x
+[8, 7, 6, 5]
+</pre>
+<p>It's also easy to sort.  Consider this set of data:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; y = [ ('IBM', 5), ('Zil', 3), ('DEC', 18) ]
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">sort</span></tt> method will run <tt class="docutils literal"><span class="pre">cmp</span></tt> on each of the tuples,
+which sort on the first element of each tuple:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; y.sort()
+&gt;&gt;&gt; y
+[('DEC', 18), ('IBM', 5), ('Zil', 3)]
+</pre>
+<p>Often it's handy to sort tuples on a different tuple element, and there
+are several ways to do that.  I prefer to provide my own sort method:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def sort_on_second(a, b):
+...   return cmp(a[1], b[1])
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; y.sort(sort_on_second)
+&gt;&gt;&gt; y
+[('Zil', 3), ('IBM', 5), ('DEC', 18)]
+</pre>
+<p>Note that here I'm using the builtin <tt class="docutils literal"><span class="pre">cmp</span></tt> method (which is what <tt class="docutils literal"><span class="pre">sort</span></tt>
+uses by default: <tt class="docutils literal"><span class="pre">y.sort()</span></tt> is equivalent to <tt class="docutils literal"><span class="pre">y.sort(cmp)</span></tt>) to do the
+comparison of the second part of the tuple.</p>
+<p>This kind of function is really handy for sorting dictionaries by
+value, as I'll show you below.</p>
+<p>(For a more in-depth discussion of sorting options, check out the
+<a class="reference" href="http://wiki.python.org/moin/HowTo/Sorting">Sorting HowTo</a>.)</p>
+<p>On to dictionaries!</p>
+<p>Your basic dictionary is just a hash table that takes keys and returns
+values:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; d = {}
+&gt;&gt;&gt; d['a'] = 5
+&gt;&gt;&gt; d['b'] = 4
+&gt;&gt;&gt; d['c'] = 18
+&gt;&gt;&gt; d
+{'a': 5, 'c': 18, 'b': 4}
+&gt;&gt;&gt; d['a']
+5
+</pre>
+<p>You can also initialize a dictionary using the <tt class="docutils literal"><span class="pre">dict</span></tt> type to create
+a dict object:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; e = dict(a=5, b=4, c=18)
+&gt;&gt;&gt; e
+{'a': 5, 'c': 18, 'b': 4}
+</pre>
+<p>Dictionaries have a few really neat features that I use pretty frequently.
+For example, let's collect (key, value) pairs where we potentially have
+multiple values for each key.  That is, given a file containing this data,</p>
+<pre class="literal-block">
+a 5
+b 6
+d 7
+a 2
+c 1
+</pre>
+<p>suppose we want to keep all the values?  If we just did it the simple way,</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; d = {}
+&gt;&gt;&gt; for line in file('data/keyvalue.txt'):
+...   key, value = line.split()
+...   d[key] = int(value)
+</pre>
+<p>we would lose all but the last value for each key:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; d
+{'a': 2, 'c': 1, 'b': 6, 'd': 7}
+</pre>
+<p>You can collect <em>all</em> the values by using <tt class="docutils literal"><span class="pre">get</span></tt>:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; d = {}
+&gt;&gt;&gt; for line in file('data/keyvalue.txt'):
+...   key, value = line.split()
+...   l = d.get(key, [])
+...   l.append(int(value))
+...   d[key] = l
+&gt;&gt;&gt; d
+{'a': [5, 2], 'c': [1], 'b': [6], 'd': [7]}
+</pre>
+<p>The key point here is that <tt class="docutils literal"><span class="pre">d.get(k,</span> <span class="pre">default)</span></tt> is equivalent to
+<tt class="docutils literal"><span class="pre">d[k]</span></tt> if <tt class="docutils literal"><span class="pre">d[k]</span></tt> already exists; otherwise, it returns <tt class="docutils literal"><span class="pre">default</span></tt>.
+So, the first time each key is used, <tt class="docutils literal"><span class="pre">l</span></tt> is set to an empty list;
+the value is appended to this list, and then the value is set for that
+key.</p>
+<p>(There are tons of little tricks like the ones above, but these are the
+ones I use the most; see the Python Cookbook for an endless supply!)</p>
+<p>Now let's try combining some of the sorting stuff above with
+dictionaries.  This time, our contrived problem is that we'd like to
+sort the keys in the dictionary <tt class="docutils literal"><span class="pre">d</span></tt> that we just loaded, but rather
+than sorting by key we want to sort by the sum of the values for each
+key.</p>
+<p>First, let's define a sort function:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def sort_by_sum_value(a, b):
+...    sum_a = sum(a[1])
+...    sum_b = sum(b[1])
+...    return cmp(sum_a, sum_b)
+</pre>
+<p>Now apply it to the dictionary items:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; items = d.items()
+&gt;&gt;&gt; items
+[('a', [5, 2]), ('c', [1]), ('b', [6]), ('d', [7])]
+&gt;&gt;&gt; items.sort(sort_by_sum_value)
+&gt;&gt;&gt; items
+[('c', [1]), ('b', [6]), ('a', [5, 2]), ('d', [7])]
+</pre>
+<p>and voila, you have your list of keys sorted by summed values!</p>
+<p>As I said, there are tons and tons of cute little tricks that you can
+do with dictionaries.  I think they're incredibly powerful.</p>
+<!-- @CTB invert dictionary -->
+</div>
+<div class="section">
+<h1><a id="list-comprehensions" name="list-comprehensions">List comprehensions</a></h1>
+<p>List comprehensions are neat little constructs that will shorten your
+lines of code considerably.  Here's an example that constructs a list
+of squares between 0 and 4:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; z = [ i**2 for i in range(0, 5) ]
+&gt;&gt;&gt; z
+[0, 1, 4, 9, 16]
+</pre>
+<p>You can also add in conditionals, like requiring only even numbers:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; z = [ i**2 for i in range(0, 10) if i % 2 == 0 ]
+&gt;&gt;&gt; z
+[0, 4, 16, 36, 64]
+</pre>
+<p>The general form is</p>
+<pre class="literal-block">
+[ expression for var in list if conditional ]
+</pre>
+<p>so pretty much anything you want can go in <tt class="docutils literal"><span class="pre">expression</span></tt> and <tt class="docutils literal"><span class="pre">conditional</span></tt>.</p>
+<p>I find list comprehensions to be very useful for both file parsing and
+for simple math.  Consider a file containing data and comments:</p>
+<pre class="literal-block">
+# this is a comment or a header
+1
+# another comment
+2
+</pre>
+<p>where you want to read in the numbers only:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; data = [ int(x) for x in open('data/commented-data.txt') if x[0] != '#' ]
+&gt;&gt;&gt; data
+[1, 2]
+</pre>
+<p>This is short, simple, and very explicit!</p>
+<p>For simple math, suppose you need to calculate the average and stddev of
+some numbers.  Just use a list comprehension:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; import math
+&gt;&gt;&gt; data = [ 1, 2, 3, 4, 5 ]
+&gt;&gt;&gt; average = sum(data) / float(len(data))
+&gt;&gt;&gt; stddev = sum([ (x - average)**2 for x in data ]) / float(len(data))
+&gt;&gt;&gt; stddev = math.sqrt(stddev)
+&gt;&gt;&gt; print average, '+/-', stddev
+3.0 +/- 1.41421356237
+</pre>
+<p>Oh, and one rule of thumb: if your list comprehension is longer than
+one line, change it to a for loop; it will be easier to read, and easier
+to understand.</p>
+</div>
+<div class="section">
+<h1><a id="building-your-own-types" name="building-your-own-types">Building your own types</a></h1>
+<p>Most people should be pretty familiar with basic classes.</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; class A:
+...   def __init__(self, item):
+...      self.item = item
+...   def hello(self):
+...      print 'hello,', self.item
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; x = A('world')
+&gt;&gt;&gt; x.hello()
+hello, world
+</pre>
+<p>There are a bunch of neat things you can do with classes, but one of
+the neatest is building new types that can be used with standard
+Python list/dictionary idioms.</p>
+<p>For example, let's consider a basic binning class.</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; class Binner:
+...   def __init__(self, binwidth, binmax):
+...     self.binwidth, self.binmax = binwidth, binmax
+...     nbins = int(binmax / float(binwidth) + 1)
+...     self.bins = [0] * nbins
+...
+...   def add(self, value):
+...     bin = value / self.binwidth
+...     self.bins[bin] += 1
+</pre>
+<p>This behaves as you'd expect:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; binner = Binner(5, 20)
+&gt;&gt;&gt; for i in range(0,20):
+...   binner.add(i)
+&gt;&gt;&gt; binner.bins
+[5, 5, 5, 5, 0]
+</pre>
+<p>...but wouldn't it be nice to be able to write this?</p>
+<pre class="literal-block">
+for i in range(0, len(binner)):
+   print i, binner[i]
+</pre>
+<p>or even this?</p>
+<pre class="literal-block">
+for i, bin in enumerate(binner):
+   print i, bin
+</pre>
+<p>This is actually quite easy, if you make the <tt class="docutils literal"><span class="pre">Binner</span></tt> class look like a
+list by adding two special functions:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; class Binner:
+...   def __init__(self, binwidth, binmax):
+...     self.binwidth, self.binmax = binwidth, binmax
+...     nbins = int(binmax / float(binwidth) + 1)
+...     self.bins = [0] * nbins
+...
+...   def add(self, value):
+...     bin = value / self.binwidth
+...     self.bins[bin] += 1
+...
+...   def __getitem__(self, index):
+...     return self.bins[index]
+...
+...   def __len__(self):
+...     return len(self.bins)
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; binner = Binner(5, 20)
+&gt;&gt;&gt; for i in range(0,20):
+...   binner.add(i)
+</pre>
+<p>and now we can treat <tt class="docutils literal"><span class="pre">Binner</span></tt> objects as normal lists:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; for i in range(0, len(binner)):
+...   print i, binner[i]
+0 5
+1 5
+2 5
+3 5
+4 0
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; for n in binner:
+...   print n
+5
+5
+5
+5
+0
+</pre>
+<p>In the case of <tt class="docutils literal"><span class="pre">len(binner)</span></tt>, Python knows to use the special method
+<tt class="docutils literal"><span class="pre">__len__</span></tt>, and likewise <tt class="docutils literal"><span class="pre">binner[i]</span></tt> just calls <tt class="docutils literal"><span class="pre">__getitem__(i)</span></tt>.</p>
+<p>The second case involves a bit more implicit magic.  Here, Python figures
+out that <tt class="docutils literal"><span class="pre">Binner</span></tt> can act like a list and simply calls the right functions
+to retrieve the information.</p>
+<p>Note that making your own read-only dictionaries is pretty simple, too:
+just provide the <tt class="docutils literal"><span class="pre">__getitem__</span></tt> function, which is called for non-integer
+values as well:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; class SillyDict:
+...    def __getitem__(self, key):
+...       print 'key is', key
+...       return key
+&gt;&gt;&gt; sd = SillyDict()
+&gt;&gt;&gt; x = sd['hello, world']
+key is hello, world
+&gt;&gt;&gt; x
+'hello, world'
+</pre>
+<p>You can also write your own mutable types, e.g.</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; class SillyDict:
+...   def __setitem__(self, key, value):
+...      print 'setting', key, 'to', value
+&gt;&gt;&gt; sd = SillyDict()
+&gt;&gt;&gt; sd[5] = 'world'
+setting 5 to world
+</pre>
+<p>but I have found this to be less useful in my own code, where I'm
+usually writing special objects like the <tt class="docutils literal"><span class="pre">Binner</span></tt> type above: I
+prefer to specify my own methods for putting information <em>into</em> the
+object type, because it reminds me that it is not a generic Python
+list or dictionary.  However, the use of <tt class="docutils literal"><span class="pre">__getitem__</span></tt> (and some of
+the iterator and generator features I discuss below) can make code <em>much</em>
+more readable, and so I use them whenever I think the meaning will be
+unambiguous.   For example, with the <tt class="docutils literal"><span class="pre">Binner</span></tt> type, the purpose of
+<tt class="docutils literal"><span class="pre">__getitem__</span></tt> and <tt class="docutils literal"><span class="pre">__len__</span></tt> is not very ambiguous, while the
+purpose of a <tt class="docutils literal"><span class="pre">__setitem__</span></tt> function (to support <tt class="docutils literal"><span class="pre">binner[x]</span> <span class="pre">=</span> <span class="pre">y</span></tt>)
+would be unclear.</p>
+<p>Overall, the creation of your own custom list and dict types is one
+way to make reusable code that will fit nicely into Python's natural
+idioms.  In turn, this can make your code look much simpler and feel
+much cleaner.  The risk, of course, is that you will also make your
+code harder to understand and (if you're not careful) harder to debug.
+Mediating between these options is mostly a matter of experience.</p>
+<!-- @CTB __getattr__ trick -->
+</div>
+<div class="section">
+<h1><a id="iterators" name="iterators">Iterators</a></h1>
+<p>Iterators are another built-in Python feature; unlike the list and
+dict types we discussed above, an iterator isn't really a <em>type</em>, but
+a <em>protocol</em>.  This just means that Python agrees to respect anything
+that supports a particular set of methods as if it were an iterator.
+(These protocols appear everywhere in Python; we were taking advantage
+of the mapping and sequence protocols above, when we defined
+<tt class="docutils literal"><span class="pre">__getitem__</span></tt> and <tt class="docutils literal"><span class="pre">__len__</span></tt>, respectively.)</p>
+<p>Iterators are more general versions of the sequence protocol; here's an
+example:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; class SillyIter:
+...   i = 0
+...   n = 5
+...   def __iter__(self):
+...      return self
+...   def next(self):
+...      self.i += 1
+...      if self.i &gt; self.n:
+...         raise StopIteration
+...      return self.i
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; si = SillyIter()
+&gt;&gt;&gt; for i in si:
+...   print i
+1
+2
+3
+4
+5
+</pre>
+<p>Here, <tt class="docutils literal"><span class="pre">__iter__</span></tt> just returns <tt class="docutils literal"><span class="pre">self</span></tt>, an object that has the
+function <tt class="docutils literal"><span class="pre">next()</span></tt>, which (when called) either returns a value or
+raises a StopIteration exception.</p>
+<p>We've actually already met several iterators in disguise; in particular,
+<tt class="docutils literal"><span class="pre">enumerate</span></tt> is an iterator.  To drive home the point, here's a simple
+reimplementation of <tt class="docutils literal"><span class="pre">enumerate</span></tt>:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; class my_enumerate:
+...   def __init__(self, some_iter):
+...      self.some_iter = iter(some_iter)
+...      self.count = -1
+...
+...   def __iter__(self):
+...      return self
+...
+...   def next(self):
+...      val = self.some_iter.next()
+...      self.count += 1
+...      return self.count, val
+&gt;&gt;&gt; for n, val in my_enumerate(['a', 'b', 'c']):
+...   print n, val
+0 a
+1 b
+2 c
+</pre>
+<p>You can also iterate through an iterator the &quot;old-fashioned&quot; way:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; some_iter = iter(['a', 'b', 'c'])
+&gt;&gt;&gt; while 1:
+...   try:
+...      print some_iter.next()
+...   except StopIteration:
+...      break
+a
+b
+c
+</pre>
+<p>but that would be silly in most situations! I use this if I just want
+to get the first value or two from an iterator.</p>
+<p>With iterators, one thing to watch out for is the return of <tt class="docutils literal"><span class="pre">self</span></tt> from
+the <tt class="docutils literal"><span class="pre">__iter__</span></tt> function.  You can all too easily write an iterator that
+isn't as re-usable as you think it is.  For example, suppose you had
+the following class:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; class MyTrickyIter:
+...   def __init__(self, thelist):
+...      self.thelist = thelist
+...      self.index = -1
+...
+...   def __iter__(self):
+...      return self
+...
+...   def next(self):
+...      self.index += 1
+...      if self.index &lt; len(self.thelist):
+...         return self.thelist[self.index]
+...      raise StopIteration
+</pre>
+<p>This works just like you'd expect as long as you create a new object each
+time:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; for i in MyTrickyIter(['a', 'b']):
+...   for j in MyTrickyIter(['a', 'b']):
+...      print i, j
+a a
+a b
+b a
+b b
+</pre>
+<p>but it will break if you create the object just once:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; mi = MyTrickyIter(['a', 'b'])
+&gt;&gt;&gt; for i in mi:
+...   for j in mi:
+...      print i, j
+a b
+</pre>
+<p>because self.index is incremented in each loop.</p>
+</div>
+<div class="section">
+<h1><a id="generators" name="generators">Generators</a></h1>
+<p>Generators are a Python implementation of <a class="reference" href="http://en.wikipedia.org/wiki/Coroutine">coroutines</a>.  Essentially, they're
+functions that let you suspend execution and return a result:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def g():
+...   for i in range(0, 5):
+...      yield i**2
+&gt;&gt;&gt; for i in g():
+...    print i
+0
+1
+4
+9
+16
+</pre>
+<p>You could do this with a list just as easily, of course:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def h():
+...   return [ x ** 2 for x in range(0, 5) ]
+&gt;&gt;&gt; for i in h():
+...    print i
+0
+1
+4
+9
+16
+</pre>
+<p>But you can do things with generators that you couldn't do with finite
+lists.  Consider two full implementation of Eratosthenes' Sieve for
+finding prime numbers, below.</p>
+<p>First, let's define some boilerplate code that can be used by either
+implementation:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def divides(primes, n):
+...   for trial in primes:
+...      if n % trial == 0: return True
+...   return False
+</pre>
+<p>Now, let's write a simple sieve with a generator:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def prime_sieve():
+...    p, current = [], 1
+...    while 1:
+...        current += 1
+...        if not divides(p, current): # if any previous primes divide, cancel
+...            p.append(current)           # this is prime! save &amp; return
+...            yield current
+</pre>
+<p>This implementation will find (within the limitations of Python's math
+functions) all prime numbers; the programmer has to stop it herself:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; for i in prime_sieve():
+...    print i
+...    if i &gt; 10:
+...        break
+2
+3
+5
+7
+11
+</pre>
+<p>So, here we're using a generator to implement the generation of an
+infinite series with a single function definition.  To do the equivalent
+with an iterator would require a class, so that the object instance can
+hold the variables:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; class iterator_sieve:
+...    def __init__(self):
+...       self.p, self.current = [], 1
+...    def __iter__(self):
+...       return self
+...    def next(self):
+...       while 1:
+...          self.current = self.current + 1
+...          if not divides(self.p, self.current):
+...             self.p.append(self.current)
+...             return self.current
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; for i in iterator_sieve():
+...    print i
+...    if i &gt; 10:
+...        break
+2
+3
+5
+7
+11
+</pre>
+<p>It is also <em>much</em> easier to write routines like <tt class="docutils literal"><span class="pre">enumerate</span></tt> as a
+generator than as an iterator:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; def gen_enumerate(some_iter):
+...   count = 0
+...   for val in some_iter:
+...      yield count, val
+...      count += 1
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; for n, val in gen_enumerate(['a', 'b', 'c']):
+...   print n, val
+0 a
+1 b
+2 c
+</pre>
+<p>Abstruse note: we don't even have to catch <tt class="docutils literal"><span class="pre">StopIteration</span></tt> here, because
+the for loop simply ends when <tt class="docutils literal"><span class="pre">some_iter</span></tt> is done!</p>
+</div>
+<div class="section">
+<h1><a id="assert" name="assert">assert</a></h1>
+<p>One of the most underused keywords in Python is <tt class="docutils literal"><span class="pre">assert</span></tt>.  Assert is
+pretty simple: it takes a boolean, and if the boolean evaluates to
+False, it fails (by raising an AssertionError exception).  <tt class="docutils literal"><span class="pre">assert</span> <span class="pre">True</span></tt>
+is a no-op.</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; assert True
+&gt;&gt;&gt; assert False
+Traceback (most recent call last):
+   ...
+AssertionError
+</pre>
+<p>You can also put an optional message in:</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; assert False, &quot;you can't do that here!&quot;
+Traceback (most recent call last):
+   ...
+AssertionError: you can't do that here!
+</pre>
+<p><tt class="docutils literal"><span class="pre">assert</span></tt> is very, very useful for making sure that code is behaving
+according to your expectations during development.  Worried that
+you're getting an empty list?  <tt class="docutils literal"><span class="pre">assert</span> <span class="pre">len(x)</span></tt>.  Want to make sure
+that a particular return value is not None?  <tt class="docutils literal"><span class="pre">assert</span> <span class="pre">retval</span> <span class="pre">is</span> <span class="pre">not</span>
+<span class="pre">None</span></tt>.</p>
+<p>Also note that 'assert' statements are removed from optimized code, so only
+use them to conditions related to actual development, and make sure that
+the statement you're evaluating has no side effects.  For example,</p>
+<pre class="doctest-block">
+&gt;&gt;&gt; a = 1
+&gt;&gt;&gt; def check_something():
+...   global a
+...   a = 5
+...   return True
+&gt;&gt;&gt; assert check_something()
+</pre>
+<p>will behave differently when run under optimization than when run without
+optimization, because the <tt class="docutils literal"><span class="pre">assert</span></tt> line will be removed completely from
+optimized code.</p>
+<p>If you need to raise an exception in production code, see below.  The
+quickest and dirtiest way is to just &quot;raise Exception&quot;, but that's kind
+of non-specific ;).</p>
+</div>
+<div class="section">
+<h1><a id="conclusions" name="conclusions">Conclusions</a></h1>
+<p>Use of common Python idioms -- both in your python code and for your
+new types -- leads to short, sweet programs.</p>
+</div>
+</div>
+</body>
+</html>

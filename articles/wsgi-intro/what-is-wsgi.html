@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.3.9: http://docutils.sourceforge.net/" />
+<title>An Introduction to the Python Web Server Gateway Interface (WSGI)</title>
+<link rel="stylesheet" href="default.css" type="text/css" />
+</head>
+<body>
+
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-4428520443903828";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_type = "text";
+google_ad_channel ="";
+google_color_border = "336699";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_url = "008000";
+google_color_text = "000000";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<div class="document" id="an-introduction-to-the-python-web-server-gateway-interface-wsgi">
+<h1 class="title">An Introduction to the Python Web Server Gateway Interface (WSGI)</h1>
+<div class="section" id="in-brief">
+<h1><a name="in-brief">In Brief</a></h1>
+<p>WSGI is a specification, laid out in <a class="reference" href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a>, for a standardized interface
+between Web servers and Python Web frameworks/applications.</p>
+<p>The goal is to provide a <em>relatively simple</em> yet <em>comprehensive</em> interface
+capable of supporting all (or most) interactions between a Web server and
+a Web framework.  (Think &quot;CGI&quot; but programmatic rather than I/O based.)</p>
+<p>An additional goal is to support &quot;middleware&quot; components for pre- and
+post-processing of requests: think gzip, recording, proxy, load-balancing.</p>
+<p>No mechanism for <em>deployment</em> and relatively few mechanisms for
+<em>configuration</em> are specified in the PEP.  (That's a problem <a class="reference" href="http://www.pythonpaste.org/">Python
+Paste</a> targets.)</p>
+<div class="section" id="all-you-really-need-to-know">
+<h2><a name="all-you-really-need-to-know">All you really need to know...</a></h2>
+<p>Unless you are developing a new Web app framework (admittedly, p &gt; 0.5...)
+you don't <em>care</em> about WSGI.  Use a Web app framework.  They all support
+WSGI at this point, which means you basically need to worry about
+configuration and deployment of your app, and nothing else.</p>
+</div>
+</div>
+<div class="section" id="summary-of-specification">
+<h1><a name="summary-of-specification">Summary of Specification</a></h1>
+<p>The PEP specifies three roles: the role of a server, the role of a
+framework/app, and the role of a middleware object.</p>
+<div class="section" id="web-server-side">
+<h2><a name="web-server-side">Web server side</a></h2>
+<p>The server must provide two things: an <tt class="docutils literal"><span class="pre">environ</span></tt> dictionary, and a
+<tt class="docutils literal"><span class="pre">start_response</span></tt> function.  The environ dictionary needs to have
+the usual things present -- it's similar to the CGI environment.
+<tt class="docutils literal"><span class="pre">start_response</span></tt> is a callable that takes two arguments, <tt class="docutils literal"><span class="pre">status</span></tt> --
+containing a standard HTTP status string like <tt class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></tt> -- and
+<tt class="docutils literal"><span class="pre">response_headers</span></tt> -- a list of standard HTTP response headers.</p>
+<p>The Web server dispatches a request to the framework/app by calling
+the application:</p>
+<pre class="literal-block">
+iterable = app(environ, start_response)
+for data in iterable:
+   # send data to client
+</pre>
+<p>It's the framework/app's responsibility to build the headers, call
+<tt class="docutils literal"><span class="pre">start_response</span></tt>, and build the data returned in <tt class="docutils literal"><span class="pre">iterable</span></tt>.  It's
+the Web server's responsibility to serve both the headers and the data
+up via HTTP.</p>
+</div>
+<div class="section" id="web-framework-app-side">
+<h2><a name="web-framework-app-side">Web framework/app side</a></h2>
+<p>The Web framework/app is represented to the server as a Python
+callable.  It can be a class, an object, or a function.  The arguments
+to <tt class="docutils literal"><span class="pre">__init__</span></tt>, <tt class="docutils literal"><span class="pre">__call__</span></tt>, or the function must be as above:
+an <tt class="docutils literal"><span class="pre">environ</span></tt> object and a <tt class="docutils literal"><span class="pre">start_response</span></tt> callable.</p>
+<p>The Web framework/app must call <tt class="docutils literal"><span class="pre">start_response</span></tt> before returning or
+yielding any data.</p>
+<p>The Web framework/app should return any data in an iterable form --
+e.g. <tt class="docutils literal"><span class="pre">return</span> <span class="pre">[</span> <span class="pre">page</span> <span class="pre">]</span></tt>.</p>
+</div>
+<div class="section" id="middleware">
+<h2><a name="middleware">Middleware</a></h2>
+<p>Middleware components must obey both the Web server side and the Web
+app/framework side of things, plus a few more minor niggling
+restrictions.  Middleware should be as transparent as possible.</p>
+</div>
+<div class="section" id="an-example-wsgi-application">
+<h2><a name="an-example-wsgi-application">An example WSGI application</a></h2>
+<p>Here's a very simple WSGI application that returns a static &quot;Hello world!&quot;
+page.</p>
+<pre class="literal-block">
+def simple_app(environ, start_response):
+    status = '200 OK'
+    response_headers = [('Content-type','text/plain')]
+    start_response(status, response_headers)
+    return ['Hello world!\n']
+</pre>
+<p>Here's a very simple middleware application that uppercases everything sent:</p>
+<pre class="literal-block">
+class Upperware:
+   def __init__(self, app):
+      self.wrapped_app = app
+
+   def __call__(self, environ, start_response):
+      for data in self.wrapped_app(environ, start_response):
+         return data.upper()
+</pre>
+<p>To instantiate/run these from the server's perspective, you just do
+the obvious:</p>
+<pre class="literal-block">
+serve(simple_app)
+</pre>
+<p>or</p>
+<pre class="literal-block">
+wrapped_app = Upperware(simple_app)
+serve(wrapped_app)
+</pre>
+<p>Yes, it can be that simple: here's my code for running Trac via
+<tt class="docutils literal"><span class="pre">scgiserver</span></tt>.</p>
+<pre class="literal-block">
+#!/usr/bin/env python
+from trac.web.main import dispatch_request as app
+from scgiserver import serve_application
+
+PREFIX=''
+PORT=4101
+
+serve_application(app, PREFIX, PORT)
+</pre>
+</div>
+<div class="section" id="omitted-complexity">
+<h2><a name="omitted-complexity">Omitted complexity</a></h2>
+<p><tt class="docutils literal"><span class="pre">start_response</span></tt> must also return a <tt class="docutils literal"><span class="pre">write_fn</span></tt> callable that legacy
+apps can use as a file-like stream.  This makes it easy to convert old apps
+to be &quot;WSGI compliant&quot;.  Its use is deprecated because using a file-like
+stream puts the reins of execution in the hands of the app object, preventing
+intelligent content handling interleaving/asynchrony on the part of the
+server.</p>
+<p><tt class="docutils literal"><span class="pre">start_response</span></tt> can take an optional parameter, <tt class="docutils literal"><span class="pre">exc_info</span></tt>, that is
+used for error handling when present.</p>
+</div>
+</div>
+<div class="section" id="my-opinions">
+<h1><a name="my-opinions">My Opinions</a></h1>
+<p><em>('cause I'm an opinionated guy, after all...)</em></p>
+<div class="section" id="why-i-like-it">
+<h2><a name="why-i-like-it">Why I Like It</a></h2>
+<p>I no longer have to worry about making my application run in multiple
+Web servers: most servers, and all frameworks, are WSGI compliant.</p>
+<p>The WSGI spec is simple enough that if you can't factor your Web app
+interface out into a WSGI-compliant interface, you didn't write your
+Web app properly.  This exposes lousy design for what it is.</p>
+<p>I can also build generic test harnesses for Web apps ;).</p>
+</div>
+<div class="section" id="what-i-don-t-like">
+<h2><a name="what-i-don-t-like">What I Don't Like</a></h2>
+<p>Discussion of WSGI is often entangled with discussion of Paste.  I'm not
+sure exactly why, but it confuses the issue quite a bit.</p>
+</div>
+<div class="section" id="what-i-don-t-grok">
+<h2><a name="what-i-don-t-grok">What I Don't Grok</a></h2>
+<p>People seem to think &quot;loosely-coupled&quot; is good, even when talking about
+things like cookies and authentication.  I don't understand how this
+simplifies code, or, conversely, I think this approach complicates very
+simple matters unnecessarily.</p>
+</div>
+<div class="section" id="wsgi-is-python-s-answer-to-ruby-on-rails">
+<h2><a name="wsgi-is-python-s-answer-to-ruby-on-rails">WSGI is Python's Answer to Ruby On Rails</a></h2>
+<p>Choice is good; WSGI makes choice a matter of <em>developer opinion</em>
+rather than <em>technical compatibility</em>.</p>
+<p>(Seriously, that's all I got.)</p>
+</div>
+</div>
+</div>
+</body>
+</html>

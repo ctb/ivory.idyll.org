@@ -1,0 +1,43 @@
+<a HREF="./" 
+class="coolMenu"
+onMouseOver="replaceClass(this,'warmMenu')" 
+onMouseOut="replaceClass(this,'coolMenu')">
+Home</a>
+<br>
+<br>
+<a HREF="./about.html" 
+class="coolMenu"
+onMouseOver="replaceClass(this,'warmMenu')" 
+onMouseOut="replaceClass(this,'coolMenu')">
+About</a>
+<br>
+<a HREF="./software.html" 
+class="coolMenu"
+onMouseOver="replaceClass(this,'warmMenu')" 
+onMouseOut="replaceClass(this,'coolMenu')">
+Software</a>
+<br>
+<a HREF="./articles.html" 
+class="coolMenu"
+onMouseOver="replaceClass(this,'warmMenu')" 
+onMouseOut="replaceClass(this,'coolMenu')">
+Articles</a>
+<br>
+<a HREF="./tutorials.html" 
+class="coolMenu"
+onMouseOver="replaceClass(this,'warmMenu')" 
+onMouseOut="replaceClass(this,'coolMenu')">
+Tutorials</a>
+<br>
+<a HREF="./screencasts.html" 
+class="coolMenu"
+onMouseOver="replaceClass(this,'warmMenu')" 
+onMouseOut="replaceClass(this,'coolMenu')">
+Screencasts</a>
+<br>
+<a HREF="./contact.html" 
+class="coolMenu"
+onMouseOver="replaceClass(this,'warmMenu')" 
+onMouseOut="replaceClass(this,'coolMenu')">
+Contact</a>
+</font>

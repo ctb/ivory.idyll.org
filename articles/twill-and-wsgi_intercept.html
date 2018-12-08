@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Introduction: Testing Python Web applications using twill and wsgi_intercept</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-4428520443903828";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_type = "text";
+google_ad_channel ="";
+google_color_border = "336699";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_url = "008000";
+google_color_text = "000000";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<div class="document" id="introduction-testing-python-web-applications-using-twill-and-wsgi-intercept">
+<h1 class="title">Introduction: Testing Python Web applications using twill and wsgi_intercept</h1>
+<p><em>Originally posted at http://www.advogato.org/article/874.html.</em></p>
+<p>One of the thorniest problems in GUI application development is how to
+test your user interface.  Web applications, as a specific and
+somewhat limited example of a GUI, are no exception to this problem.
+However, there are several options for testing Web applications now
+available.  One of my favorites is <a class="reference" href="http://www.idyll.org/~t/www-tools/twill/">twill</a>, a remote HTTP driver
+application that lets you script Web sites.  (Disclaimer: I am the
+primary author of twill, so take my recommendation with a grain of
+salt ;).</p>
+<p>twill implements a simple scripting language and emulates a
+command-line browser.  With twill, you can visit URLs, follow links,
+fill out forms, log in and log out, deal with cookies, and follow
+redirects.  Because twill is written in Python, you can also script it
+completely from within Python.  And, because twill accurately emulates
+the HTTP behavior of a browser, it's good for both screen-scraping Web
+sites you don't control, and testing Web sites that you do control.
+Note that twill does have a big flaw in this regard: it cannot
+understand JavaScript. This is why &quot;browser drivers&quot; like <a class="reference" href="http://www.openqa.org/selenium/">Selenium</a>
+and <a class="reference" href="http://pamie.sourceforge.net/">PAMIE</a> are required for testing AJAX applications.  However, there
+are tradeoffs.  One positive tradeoff is that twill can run in a completely
+automated manner and has no browser dependencies, which makes it
+particularly suitable for unit tests.</p>
+<p>Unit tests are a useful type of testing because they're generally
+simple, test discrete components of the source code, and are
+<em>automated</em>.  Because unit tests are automated, there is little
+or no cost to running them, which means developers can test their code
+after even minor changes.  This can lead to a very fluid style of
+development in which major refactorings are thoroughly tested at each
+step.</p>
+<p>Using twill for unit tests brings in a new problem, however: the setup
+and teardown of the Web site.  This is true not just for twill but for
+any other HTTP driver, such as urllib2, <a class="reference" href="http://www.cherrypy.org/file/trunk/cherrypy/test/webtest.py">webtest</a>, <a class="reference" href="http://mechanicalcat.net/tech/webunit/">webunit</a>,
+<a class="reference" href="http://wwwsearch.sf.net/">mechanize</a>, <a class="reference" href="http://www.python.org/pypi/mechanoid/">mechanoid</a>, and <a class="reference" href="http://www.python.org/pypi/ZopeTestbrowser">zope.testbrowser</a>: you still have to set
+up your development Web site to serve pages, so that it looks and
+behaves like your real site.  In practice, this breaks down into
+multiple sub-problems:</p>
+<ul class="simple">
+<li>you have to start another process; that process has to bind to a
+port and a hostname (usually something like localhost:8080);</li>
+<li>your unit tests have to wait for the Web site to start up, which
+can take a second or two;</li>
+<li>and then you have to shut the Web site down at the end of the unit
+tests.</li>
+</ul>
+<p>Each of these is its own tricky problem.  (What if the port is already
+bound?  What if your server is slow today?)  Moreover, proper
+profiling and code coverage testing of the Web application become
+considerably more complicated when you're dealing with multiple
+processes and &quot;real, live&quot; Web applications.</p>
+<p>This is moderately complex stuff to script, and it's pretty daunting
+to get it all working in a unit test framework (at least for
+me!). Plus, having a more complicated test setup than most of the
+individual tests seems like a bad design choice.  While actually
+deploying a test Web site is necessary to properly test a Web app, for
+your unit tests it's almost certainly overkill.  But what other
+options are there, you might ask?</p>
+<p>Well, after <a class="reference" href="http://blog.ianbicking.org/best-of-the-web-app-test-frameworks.html">a suggestion</a> from Ian Bicking, I implemented an
+in-process test harness for WSGI applications, called <a class="reference" href="http://darcs.idyll.org/~t/projects/wsgi_intercept/README.html">wsgi_intercept</a>.
+wsgi_intercept lets you redirect HTTP calls directly into any
+<a class="reference" href="http://www.python.org/peps/pep-0333.html">WSGI-compliant</a> application, bypassing the network. With
+wsgi_intercept, you don't need to bind any sockets or connect to the
+network at all in order to talk to your Web application from
+twill. However, because wsgi_intercept acts at a low level -- the
+redirection occurs in httplib -- your application looks and feels like
+it is actually being called via HTTP. This can considerably simplify
+the testing process.  (Testing aficionados may recognize this technique
+as building a &quot;mock network interface&quot;.)</p>
+<p>twill comes with full wsgi_intercept integration, of course -- and you
+can find hooks and examples for all of the other Python Web testing
+frameworks at <a class="reference" href="http://darcs.idyll.org/~t/projects/wsgi_intercept/README.html">the wsgi_intercept page</a>.  So how does it work in practice?</p>
+<p>Roughly speaking, you need to do the following:</p>
+<blockquote>
+<ul class="simple">
+<li>package your application as a WSGI app object;</li>
+<li>build a function to return that app object;</li>
+<li>hook that function up to a particular host/port combination;</li>
+<li>run whatever twill scripts you want to run for the test;</li>
+<li>teardown (remove the intercept, shut down the server, etc.)</li>
+</ul>
+</blockquote>
+<p>Below, I walk through setting up <a class="reference" href="http://somethingaboutorange.com/mrl/projects/nose/">nose</a>-based unit testing of two simple
+applications -- a <a class="reference" href="http://www.mems-exchange.org/software/quixote/">Quixote</a> application, and a <a class="reference" href="http://www.cherrypy.org/">CherryPy</a>
+application.  In both cases most of the complexity is in putting the
+start/stop calls in the correct order.</p>
+<div class="section">
+<h1><a id="in-practice-testing-a-quixote-application-using-twill-and-wsgi-intercept" name="in-practice-testing-a-quixote-application-using-twill-and-wsgi-intercept">In Practice: Testing a Quixote application using twill and wsgi_intercept</a></h1>
+<p><em>You'll need Quixote 2.3 for this, as well as nose 0.8.x and twill 0.8.2.</em></p>
+<p>For Quixote, let's test the <tt class="docutils literal"><span class="pre">mini_demo</span></tt> application that
+comes with Quixote 2.x.  Unfortunately, Quixote doesn't (yet?) come
+with a WSGI interface; however, there's <a class="reference" href="http://cafepy.com/quixote_extras/rex/wsgi_server.py">an adapter available</a>
+as <tt class="docutils literal"><span class="pre">wsgi_server.QWIP</span></tt>.  So we'll need wsgi_server.py, as well
+as Quixote 2.x and nose.</p>
+<p>First, create a test file; I'll just call it 'test.py'.  Let's start by
+roughing out a nose unit test:</p>
+<pre class="literal-block">
+class TestMiniDemo:
+   def setUp(self):
+      pass
+
+   def tearDown(self):
+      pass
+</pre>
+<p>Now, the Quixote <tt class="docutils literal"><span class="pre">Publisher</span></tt> object we want to test is returned
+by <tt class="docutils literal"><span class="pre">quixote.demo.mini_demo.create_publisher()</span></tt>.  We need to
+dynamically create a function that creates the publisher, wraps it as
+a WSGI object, and then returns that same object each time it's
+called:</p>
+<pre class="literal-block">
+publisher = quixote.demo.mini_demo.create_publisher()
+wsgi_app = wsgi_server.QWIP(publisher)
+
+fn = lambda : wsgi_app
+</pre>
+<p>If we put this in the <tt class="docutils literal"><span class="pre">setUp</span></tt> function, we have what we need.
+The only tricky bit is caching the application object.  Why do we need
+to do this?  Well, the function passed into wsgi_intercept is called
+once for <em>each</em> intercepted connection, but we only want to create
+the WSGI app object <em>once</em>.  By storing the app object in a dictionary
+that persists for the lifetime of the dynamically defined function, we
+essentially memoize the WSGI application object.  (I'm not thrilled with
+this particular approach: let me know if you have a better way of doing
+this.)</p>
+<p>OK, once we have this function, we need to install it to handle
+requests to <tt class="docutils literal"><span class="pre">localhost:8080</span></tt>, and then we're ready.  Our final
+<tt class="docutils literal"><span class="pre">setUp</span></tt> function looks like this:</p>
+<pre class="literal-block">
+def setUp(self):
+   # create a publisher obj
+   publisher = quixote.demo.mini_demo.create_publisher()
+
+   # wrap
+   wsgi_app = QWIP(publisher)
+
+   # install the app at localhost:8080 for wsgi_intercept
+   twill.add_wsgi_intercept('localhost', 8080, lambda : wsgi_app)
+
+   # while we're at it, stop twill from running off at the mouth...
+   self.outp = StringIO()
+   twill.set_output(self.outp)
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">tearDown</span></tt> function is much simpler: we just need to remove
+the intercept, and then clear the Quixote publisher object.</p>
+<pre class="literal-block">
+def tearDown(self):
+   # remove intercept
+   twill.remove_wsgi_intercept('localhost', 8080)
+
+   # clear out the publisher
+   quixote.publish._publisher = None
+</pre>
+<p>...and now we're ready for a test or two!  I'll define two: one to test
+the main page, and the other to test the link.</p>
+<pre class="literal-block">
+def test_welcome(self):
+   script = &quot;find 'Welcome to the Quixote demo'\n&quot;
+   twill.execute_string(script, initial_url='http://localhost:8080/')
+
+def test_hello(self):
+   script = &quot;&quot;&quot;\
+follow link
+find 'Hello world!'
+&quot;&quot;&quot;
+   twill.execute_string(script, initial_url='http://localhost:8080/')
+</pre>
+<p>Briefly, these scripts both go to 'localhost:8080'; the first script
+makes sure that it can find specific text on the front page, while the
+second script tests the result of following the front page link to
+a 'Hello world' page.  (Longer scripts can go in their own file,
+and <tt class="docutils literal"><span class="pre">execute_file</span></tt> can be used to run them.)</p>
+<p>Putting it all together with the correct import statements -- you can
+download the <a class="reference" href="http://darcs.idyll.org/~t/projects/wsgi_intercept-examples-latest.tar.gz">final file</a> if you like -- and running
+<tt class="docutils literal"><span class="pre">nosetests</span></tt>, you get:</p>
+<pre class="literal-block">
+% nosetests
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.381s
+
+OK
+</pre>
+<p>So everything works! Huzzah!  (If you want to reassure yourself that
+it's actually running the tests through the Web application
+break a test by changing the 'find' statements to something else;
+see, they really <em>are</em> being run. ;)</p>
+</div>
+<div class="section">
+<h1><a id="in-practice-testing-a-cherrypy-application-using-twill-and-wsgi-intercept" name="in-practice-testing-a-cherrypy-application-using-twill-and-wsgi-intercept">In Practice: Testing a CherryPy application using twill and wsgi_intercept</a></h1>
+<p><em>You'll need CherryPy 2.1.1 for this, along with nose 0.8.x and twill 0.8.2 (the very latest).</em></p>
+<p>For CherryPy, let's test the &quot;Hello, world!&quot; application that is
+included in the tutorial code.  The magic incantations to get a WSGI
+app object out of CherryPy are not so tricky:</p>
+<pre class="literal-block">
+import cherrypy
+from cherrypy.tutorial.tut01_helloworld import HelloWorld
+
+# set up the root object
+cherrypy.root = HelloWorld()
+
+# initialize
+cherrypy.server.start(initOnly=True, serverClass=None)
+
+# get WSGI app.
+from cherrypy._cpwsgi import wsgiApp
+</pre>
+<p>where 'wsgiApp' is the final application object we wanted.</p>
+<p>Starting with a 'test.py' containing a simple framework for a nose unit test,</p>
+<pre class="literal-block">
+class TestHelloWorld:
+   def setUp(self):
+      pass
+
+   def tearDown(self):
+      pass
+</pre>
+<p>we can fill in the <tt class="docutils literal"><span class="pre">setUp</span></tt> function as before:</p>
+<pre class="literal-block">
+def setUp(self):
+   # configure cherrypy to be quiet ;)
+   cherrypy.config.update({ &quot;server.logToScreen&quot; : False })
+
+   # create root &amp; set up the server.
+   cherrypy.root = HelloWorld()
+   cherrypy.server.start(initOnly=True, serverClass=None)
+
+   # get WSGI app.
+   from cherrypy._cpwsgi import wsgiApp
+
+   # install the app at localhost:8080 for wsgi_intercept
+   twill.add_wsgi_intercept('localhost', 8080, lambda : wsgiApp)
+
+   # while we're at it, snarf twill's output.
+   self.outp = StringIO()
+   twill.set_output(self.outp)
+</pre>
+<p>and the <tt class="docutils literal"><span class="pre">tearDown</span></tt> function is virtually identical to the Quixote
+example:</p>
+<pre class="literal-block">
+def tearDown(self):
+  # remove intercept.
+  twill.remove_wsgi_intercept('localhost', 8080)
+
+   # shut down the cherrypy server.
+  cherrypy.server.stop()
+</pre>
+<p>This application is a bit simpler than the Quixote mini demo, so let's
+just build one test function:</p>
+<pre class="literal-block">
+def test_hello(self):
+   script = &quot;find 'Hello world!'&quot;
+   twill.execute_string(string, initial_url='http://localhost:8080/')
+</pre>
+<p>and when we run it, voila! it all works:</p>
+<pre class="literal-block">
+% nosetests
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.289s
+
+OK
+</pre>
+</div>
+<div class="section">
+<h1><a id="conclusions-and-caveats" name="conclusions-and-caveats">Conclusions and Caveats</a></h1>
+<p>This code is all still quite young, but it works!  Please remember
+that that you <em>do</em> need to run some tests on a live site -- twill can
+be used for sites without much JavaScript, while Selenium is probably
+the way to go for anything more complicated.  Still, using twill and
+wsgi_intercept to run tests in-process is relatively simple and
+straightforward, and I think it can be a very useful component of your
+Web app development process.</p>
+<p>It can be very convenient to test Web apps this way.  The biggest
+convenience, for me, is that I can avoid all the complicated setup
+stuff.  A close second is that code coverage analysis, profiling, and
+even debugging can all run within your unit tests, because everything
+is in-process.  And a third is that unit tests run this way seem to
+run quite a bit faster, perhaps because there's no setup/teardown of
+the Web server.</p>
+<p>If you have any suggestions, corrections, or explications, please send
+them on to me at <em>titus&#64;caltech.edu</em>.  I'll acknowledge them
+appropriately, I promise!  I would also be interested in examples for
+other Python Web frameworks; right now I only use CherryPy and Quixote
+myself.  (Note that Michael Twomey has also posted <a class="reference" href="http://blogs.translucentcode.org/mick/2006/02/26/basic-twill-intercept-testing-django/">an example for Django</a>.)</p>
+<p>--titus</p>
+<p><strong>Software Links</strong></p>
+<p>twill Web browsing language:</p>
+<blockquote>
+<ul class="simple">
+<li>Web site &amp; docs: <a class="reference" href="http://www.idyll.org/~t/www-tools/twill/">http://www.idyll.org/~t/www-tools/twill/</a></li>
+<li>download: <a class="reference" href="http://darcs.idyll.org/~t/projects/twill-0.8.2.tar.gz">http://darcs.idyll.org/~t/projects/twill-0.8.2.tar.gz</a></li>
+</ul>
+</blockquote>
+<p>Quixote Web application framework:</p>
+<blockquote>
+<ul class="simple">
+<li>Web site: <a class="reference" href="http://www.mems-exchange.org/software/quixote/">http://www.mems-exchange.org/software/quixote/</a></li>
+<li>download: <a class="reference" href="http://www.mems-exchange.org/software/quixote/Quixote-2.4.tar.gz">http://www.mems-exchange.org/software/quixote/Quixote-2.4.tar.gz</a></li>
+</ul>
+</blockquote>
+<p>CherryPy Web application framework:</p>
+<blockquote>
+<ul class="simple">
+<li>Web site: <a class="reference" href="http://www.cherrypy.org/">http://www.cherrypy.org/</a></li>
+<li>download: <a class="reference" href="http://prdownloads.sourceforge.net/cherrypy/CherryPy-2.1.1.tar.gz?download">http://prdownloads.sourceforge.net/cherrypy/CherryPy-2.1.1.tar.gz?download</a></li>
+</ul>
+</blockquote>
+<p>nose unit testing framework:</p>
+<blockquote>
+<ul class="simple">
+<li>Web site and docs: <a class="reference" href="http://somethingaboutorange.com/mrl/projects/nose/">http://somethingaboutorange.com/mrl/projects/nose/</a></li>
+<li>download: <a class="reference" href="http://somethingaboutorange.com/mrl/projects/nose/nose-0.8.6.tar.gz">http://somethingaboutorange.com/mrl/projects/nose/nose-0.8.6.tar.gz</a></li>
+</ul>
+</blockquote>
+<p>Mike Orr's WSGI wrapper for Quixote:</p>
+<blockquote>
+<ul class="simple">
+<li>view source: <a class="reference" href="http://cafepy.com/quixote_extras/rex/wsgi_server.py">http://cafepy.com/quixote_extras/rex/wsgi_server.py</a></li>
+</ul>
+</blockquote>
+<p>(The file itself is included in the source distribution for this article.)</p>
+<p>Source distribution for this article:</p>
+<blockquote>
+<ul class="simple">
+<li>darcs repository: <a class="reference" href="http://darcs.idyll.org/~t/projects/wsgi_intercept-examples/">http://darcs.idyll.org/~t/projects/wsgi_intercept-examples/</a></li>
+<li>download directly: <a class="reference" href="http://darcs.idyll.org/~t/projects/wsgi_intercept-examples-latest.tar.gz">http://darcs.idyll.org/~t/projects/wsgi_intercept-examples-latest.tar.gz</a></li>
+</ul>
+</blockquote>
+<p>CTB 3/06</p>
+</div>
+</div>
+</body>
+</html>

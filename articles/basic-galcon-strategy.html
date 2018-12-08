@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>Basic GalCon Strategy</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-4428520443903828";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_type = "text";
+google_ad_channel ="";
+google_color_border = "336699";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_url = "008000";
+google_color_text = "000000";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+
+<div class="document" id="basic-galcon-strategy">
+<h1 class="title">Basic GalCon Strategy</h1>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#starting-out" id="id1" name="id1">Starting Out</a><ul>
+<li><a class="reference" href="#my-starting-position-rocks" id="id2" name="id2">My starting position rocks!</a></li>
+<li><a class="reference" href="#my-starting-position-sucks" id="id3" name="id3">My starting position sucks!</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#basic-strategy" id="id4" name="id4">Basic Strategy</a><ul>
+<li><a class="reference" href="#when-to-run" id="id5" name="id5">When to run</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#end-game" id="id6" name="id6">End Game</a><ul>
+<li><a class="reference" href="#it-s-a-standoff" id="id7" name="id7">It's a standoff</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#team-play" id="id8" name="id8">Team Play</a><ul>
+<li><a class="reference" href="#team-play-tips" id="id9" name="id9">Team Play Tips</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#apparently-common-misconceptions" id="id10" name="id10">(Apparently) Common Misconceptions</a></li>
+</ul>
+</div>
+<p>This is Version 1.  <a class="reference" href="mailto:titus&#64;caltech.edu">Contact me</a> if you
+have suggestions, revisions, etc. to add.</p>
+<p><a class="reference" href="http://www.imitationpickles.org/galcon/index.html">GalCon</a> is a fun
+tactics game that you can play with people online.</p>
+<p>These strategy tips are fairly obvious once you've played the game a bit,
+I think, but they make the game a lot more fun for newbies.  All info
+is IMO.</p>
+<p>I play as 'titus' and 'mimi', and I apparently win ~60-70% of games.
+If you can get advice from people who win more, or who beat me
+regularly, take it ;).</p>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="starting-out" name="starting-out">Starting Out</a></h1>
+<p>The initial moves often determine if you're going to survive more than
+30 seconds.  There are people who are really good at this, and there
+are people who seem to suck.  I'm not the best, but here's my advice
+anyway.</p>
+<p>Everyone starts with the same home planet production &amp; troop number.  So
+it's easy to determine whether or not you can take out your neighbor:
+if he's spending a lot of troops taking over planets, you should have a
+small window of opportunity to nab his home planet.</p>
+<p>If you have a superior starting position -- more/better planets -- wait
+to attack.  Build up your strength first.  Don't look too strong, though;
+you may invite attacks from both neighbors.</p>
+<p>If you have a weaker starting position, attack immediately and hope
+you're up against someone who is going to make a mistake.  That's
+the only way you're going to have a chance ;).</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="my-starting-position-rocks" name="my-starting-position-rocks">My starting position rocks!</a></h2>
+<p>You've started out in a gold mine of big fat planets!  Hooray, you've
+got a great chance of winning!</p>
+<p>Well, maybe.  If you have low-cost big planets available, you're home
+free: take 'em and start expanding.</p>
+<p>If you have high-cost planets nearby -- anything above 10-20 is a
+high-cost planet in my book -- be careful.  One of my favorite things
+to do is wait for someone to spend 40 or 50 troops on taking a big
+planet, and then grab it out from under their nose.  Then, since I'm
+often near their home planet, and I know that I now have bigger
+production than them... yum!  Easy meat!</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id3" id="my-starting-position-sucks" name="my-starting-position-sucks">My starting position sucks!</a></h2>
+<p>You're basically toast.  Your best bet is to hope that no one good
+starts near you, and/or that your neighbors get distracted by other
+enemies.  If there are some big planets in the middle to take, that's
+good: but be careful, because your neighbors may take advantage of
+the transit time to grab your home planet.</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id4" id="basic-strategy" name="basic-strategy">Basic Strategy</a></h1>
+<p>Never send 100% of your troops away from your planets unless you're damn
+sure that your planets are safe.</p>
+<p>Transit time has a big effect.  (See the starting position advice
+above, too.)  If you send your ships a long way, the enemy has a lot
+of time to prepare and build up his troops: even if you ship from a
+planet with even or slightly production, the extra troops produced by
+the defending planet while your ships are in transit mean that you are
+more likely to lose the battle than not.</p>
+<p>Planets that are close together can support each other much more
+effectively, because you can shift troops around between them quickly.</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id5" id="when-to-run" name="when-to-run">When to run</a></h2>
+<p>If you're up against a much stronger enemy and there's no help in
+sight, RUN.  Concentrate all your troops and roam around the board,
+grabbing small and/or lightly-defended planets from your enemies.
+Remember, if they're concentrating on their big enemy across the
+board, they're leaving their back planets open for the taking.
+Gauging when and where to strike is an art that I haven't mastered,
+but I have seen some fantastic comebacks...</p>
+<p>(Yes, you <em>can</em> just sit back and die.  But that's kind of boring, and
+you can probably tilt the balance of the game towards or away from
+people if you attack their back planets cleverly.)</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id6" id="end-game" name="end-game">End Game</a></h1>
+<p>If you have even a marginal superiority, set your phasers on 30% and
+go after every planet the enemy has.  Unless they're very good, they
+will get flustered and try to protect their big planets; or they may
+try to attack your big planets.  Meanwhile you'll take all the rest of
+their planets, at which point you can crush them at will.</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id7" id="it-s-a-standoff" name="it-s-a-standoff">It's a standoff</a></h2>
+<p>If you're down to a Galcon Standoff -- everyone has expanded to
+UN-sanctioned borders and is sitting there starting at each other --
+you have a few options.  If you've clearly got more planets than the
+other people, waiting is your best option.  You'll grow incrementally
+more stronger than them.  If they team up, try to take one of them out
+as quickly as possible.  Usually you can get one of them to backstab
+each other.</p>
+<p>If you're weaker, try to ask the other weak player for a truce while
+you take out the bigger player.  This will often invite an immediate
+attack from the biggest player, but that's ok: if the other weak
+player is even remotely sane, they'll attack the bigger player while
+he's busy with you.</p>
+<p>If you all look roughly the same strength, try to invite an attack by
+sending a few hundred troops at some minor planet that you have a
+chance of taking.  Then sit back, defend, and wait for an opening.</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id8" id="team-play" name="team-play">Team Play</a></h1>
+<p>In team play, you're part of a team of people that can share troops.
+You can see (but not direct) the troops on the planets owned by
+your teammates.  The only way you can share troops is by &quot;attacking&quot;
+their planets with yours; you can't take or direct other people's
+troops.</p>
+<p>Team games are <em>very</em> different, and if you don't hold up your end of
+things your teammates will quickly get frustrated with you.  If you
+don't feel up to cooperating with other people, don't play in a team
+game!</p>
+<p>One of the first team moves you make should be to take out any
+neighboring enemies as quickly as possible.  If you're not next to an
+enemy, ship a bunch of troops to any neighbor that <em>is</em> next to an
+enemy.  You'll be able to take that enemy out virtually instantly.</p>
+<p>Don't focus just on your own battle.  (I know, easier said than
+done...)  If you focus too much on taking down an enemy, their own
+teammates may be attacking your back planets.</p>
+<p>My favorite role in team play is to build up a big reservoir of
+planets, then support my teammates on either side.  You get credit for
+wins either way, and if you have a good starting position you can do
+very well by playing this way. Plus, your teammates will be very happy
+with you.</p>
+<p>Unbalanced team numbers are inherently unfair, e.g. 4 on 3.  I very
+rarely see the team with fewer players win.  Why this is should be
+obvious: the team with one or more additional players can
+<em>immediately</em> gang up on at least one member of the other team.</p>
+<p>There is no way to divide 3, 5, 7, 9, or 11 people into two teams.</p>
+<p>There is no way to divide 3, 5, 7, or 11 people into fair teams.  (They're
+prime numbers.)</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id9" id="team-play-tips" name="team-play-tips">Team Play Tips</a></h2>
+<p>Finding your home planet when the game starts can be tricky,
+especially if you're not a primary color.  I start every game by
+immediately selecting everything on the screen; that highlights my
+home planet.</p>
+<p>Run.  Run.  Run.  If you're about to die, leave your planets and ask
+one of your teammates to find a home for you.  Keep in mind they may
+be busy at the moment ;).  It's in everyone's interest to keep team
+member's alive, though: the more different people attacking the enemy
+team, the more likely it is that you'll win.</p>
+<p>You get credit for the team win even if you die before your team wins,
+as far as I can tell.</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id10" id="apparently-common-misconceptions" name="apparently-common-misconceptions">(Apparently) Common Misconceptions</a></h1>
+<p>Keeping many troops on a planet doesn't increase its production.</p>
+<p>Leaving before you lose still counts as a loss on your stats, if you
+care about that sort of thing.</p>
+<p>There is no second place.  Don't play for it.</p>
+</div>
+</div>
+</body>
+</html>

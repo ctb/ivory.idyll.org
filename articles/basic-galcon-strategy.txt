@@ -1,0 +1,192 @@
+=====================
+Basic GalCon Strategy
+=====================
+
+.. contents::
+
+This is Version 1.  `Contact me <mailto:titus@caltech.edu>`__ if you
+have suggestions, revisions, etc. to add.
+
+`GalCon <http://www.imitationpickles.org/galcon/index.html>`__ is a fun
+tactics game that you can play with people online.
+
+These strategy tips are fairly obvious once you've played the game a bit,
+I think, but they make the game a lot more fun for newbies.  All info
+is IMO.
+
+I play as 'titus' and 'mimi', and I apparently win ~60-70% of games.
+If you can get advice from people who win more, or who beat me
+regularly, take it ;).
+
+Starting Out
+============
+
+The initial moves often determine if you're going to survive more than
+30 seconds.  There are people who are really good at this, and there
+are people who seem to suck.  I'm not the best, but here's my advice
+anyway.
+
+Everyone starts with the same home planet production & troop number.  So
+it's easy to determine whether or not you can take out your neighbor:
+if he's spending a lot of troops taking over planets, you should have a
+small window of opportunity to nab his home planet.
+
+If you have a superior starting position -- more/better planets -- wait
+to attack.  Build up your strength first.  Don't look too strong, though;
+you may invite attacks from both neighbors.
+
+If you have a weaker starting position, attack immediately and hope
+you're up against someone who is going to make a mistake.  That's
+the only way you're going to have a chance ;).
+
+My starting position rocks!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You've started out in a gold mine of big fat planets!  Hooray, you've
+got a great chance of winning!
+
+Well, maybe.  If you have low-cost big planets available, you're home
+free: take 'em and start expanding.
+
+If you have high-cost planets nearby -- anything above 10-20 is a
+high-cost planet in my book -- be careful.  One of my favorite things
+to do is wait for someone to spend 40 or 50 troops on taking a big
+planet, and then grab it out from under their nose.  Then, since I'm
+often near their home planet, and I know that I now have bigger
+production than them... yum!  Easy meat!
+
+My starting position sucks!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You're basically toast.  Your best bet is to hope that no one good
+starts near you, and/or that your neighbors get distracted by other
+enemies.  If there are some big planets in the middle to take, that's
+good: but be careful, because your neighbors may take advantage of
+the transit time to grab your home planet.
+
+Basic Strategy
+==============
+
+Never send 100% of your troops away from your planets unless you're damn
+sure that your planets are safe.
+
+Transit time has a big effect.  (See the starting position advice
+above, too.)  If you send your ships a long way, the enemy has a lot
+of time to prepare and build up his troops: even if you ship from a
+planet with even or slightly production, the extra troops produced by
+the defending planet while your ships are in transit mean that you are
+more likely to lose the battle than not.
+
+Planets that are close together can support each other much more
+effectively, because you can shift troops around between them quickly.
+
+When to run
+~~~~~~~~~~~
+
+If you're up against a much stronger enemy and there's no help in
+sight, RUN.  Concentrate all your troops and roam around the board,
+grabbing small and/or lightly-defended planets from your enemies.
+Remember, if they're concentrating on their big enemy across the
+board, they're leaving their back planets open for the taking.
+Gauging when and where to strike is an art that I haven't mastered,
+but I have seen some fantastic comebacks...
+
+(Yes, you *can* just sit back and die.  But that's kind of boring, and
+you can probably tilt the balance of the game towards or away from
+people if you attack their back planets cleverly.)
+
+End Game
+========
+
+If you have even a marginal superiority, set your phasers on 30% and
+go after every planet the enemy has.  Unless they're very good, they
+will get flustered and try to protect their big planets; or they may
+try to attack your big planets.  Meanwhile you'll take all the rest of
+their planets, at which point you can crush them at will.
+
+It's a standoff
+~~~~~~~~~~~~~~~
+
+If you're down to a Galcon Standoff -- everyone has expanded to
+UN-sanctioned borders and is sitting there starting at each other --
+you have a few options.  If you've clearly got more planets than the
+other people, waiting is your best option.  You'll grow incrementally
+more stronger than them.  If they team up, try to take one of them out
+as quickly as possible.  Usually you can get one of them to backstab
+each other.
+
+If you're weaker, try to ask the other weak player for a truce while
+you take out the bigger player.  This will often invite an immediate
+attack from the biggest player, but that's ok: if the other weak
+player is even remotely sane, they'll attack the bigger player while
+he's busy with you.
+
+If you all look roughly the same strength, try to invite an attack by
+sending a few hundred troops at some minor planet that you have a
+chance of taking.  Then sit back, defend, and wait for an opening.
+
+Team Play
+=========
+
+In team play, you're part of a team of people that can share troops.
+You can see (but not direct) the troops on the planets owned by
+your teammates.  The only way you can share troops is by "attacking"
+their planets with yours; you can't take or direct other people's
+troops.
+
+Team games are *very* different, and if you don't hold up your end of
+things your teammates will quickly get frustrated with you.  If you
+don't feel up to cooperating with other people, don't play in a team
+game!
+
+One of the first team moves you make should be to take out any
+neighboring enemies as quickly as possible.  If you're not next to an
+enemy, ship a bunch of troops to any neighbor that *is* next to an
+enemy.  You'll be able to take that enemy out virtually instantly.
+
+Don't focus just on your own battle.  (I know, easier said than
+done...)  If you focus too much on taking down an enemy, their own
+teammates may be attacking your back planets.
+
+My favorite role in team play is to build up a big reservoir of
+planets, then support my teammates on either side.  You get credit for
+wins either way, and if you have a good starting position you can do
+very well by playing this way. Plus, your teammates will be very happy
+with you.
+
+Unbalanced team numbers are inherently unfair, e.g. 4 on 3.  I very
+rarely see the team with fewer players win.  Why this is should be
+obvious: the team with one or more additional players can
+*immediately* gang up on at least one member of the other team.
+
+There is no way to divide 3, 5, 7, 9, or 11 people into two teams.
+
+There is no way to divide 3, 5, 7, or 11 people into fair teams.  (They're
+prime numbers.)
+
+Team Play Tips
+~~~~~~~~~~~~~~
+
+Finding your home planet when the game starts can be tricky,
+especially if you're not a primary color.  I start every game by
+immediately selecting everything on the screen; that highlights my
+home planet.
+
+Run.  Run.  Run.  If you're about to die, leave your planets and ask
+one of your teammates to find a home for you.  Keep in mind they may
+be busy at the moment ;).  It's in everyone's interest to keep team
+member's alive, though: the more different people attacking the enemy
+team, the more likely it is that you'll win.
+
+You get credit for the team win even if you die before your team wins,
+as far as I can tell.
+
+(Apparently) Common Misconceptions
+==================================
+
+Keeping many troops on a planet doesn't increase its production.
+
+Leaving before you lose still counts as a loss on your stats, if you
+care about that sort of thing.
+
+There is no second place.  Don't play for it.
